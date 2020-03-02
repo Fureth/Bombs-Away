@@ -48,6 +48,9 @@ void Game::createGameObjects()
 		m_pGameMap->LoadMap(firstLevel);
 		m_pGameMap->DrawMap();
 
+		setTimer(99);
+		timerCount = 0;
+
 		m_bObjectsCreated = true;
 	}
 }
@@ -82,6 +85,14 @@ void Game::deleteGameObjects()
 			}
 			m_pEnemyVec.erase(remove(m_pEnemyVec.begin(), m_pEnemyVec.end(), nullptr), m_pEnemyVec.end());
 		}
+		if (!m_pPowerupVec.empty())
+		{
+			for (auto& currentPowerup : m_pPowerupVec)
+			{
+				currentPowerup = nullptr;
+			}
+			m_pPowerupVec.erase(remove(m_pPowerupVec.begin(), m_pPowerupVec.end(), nullptr), m_pPowerupVec.end());
+		}
 
 		m_bObjectsCreated = false;
 	}
@@ -115,6 +126,11 @@ std::vector<Wall*>* Game::getWallVector()
 std::vector<Enemy*>* Game::getEnemyVector()
 {
 	return &m_pEnemyVec;
+}
+
+std::vector<Powerup*>* Game::getPowerupVector()
+{
+	return &m_pPowerupVec;
 }
 
 bool Game::init(const char* title, int xpos, int ypos, int height, int width, bool fullscreen)
@@ -164,6 +180,10 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, bo
 	}
 	m_pFSM = new FSM();
 	m_pFSM->changeState(new TitleState());
+
+	// Load UI
+	UI::loadUI();
+	
 	std::cout << "init success" << std::endl;
 	m_bRunning = true; // everything initialized successfully - start the main loop
 	
@@ -187,6 +207,10 @@ void Game::render()
 		// Can turn this block of code into a "render game objects" function
 		m_pBomb->draw();
 		m_pPlayer->draw();
+		for (auto& currentPowerup : m_pPowerupVec)
+		{
+			currentPowerup->draw();
+		}
 		for (auto& currentEnemy : m_pEnemyVec)
 		{
 			currentEnemy->draw();
@@ -205,6 +229,36 @@ void Game::render()
 		// Can turn this block of code into a "render game objects" function
 		m_pBomb->draw();
 		m_pPlayer->draw();
+		for (auto& currentPowerup : m_pPowerupVec)
+		{
+			currentPowerup->draw();
+		}
+		for (auto& currentEnemy : m_pEnemyVec)
+		{
+			currentEnemy->draw();
+		}
+		for (auto& currentWall : m_pWallVec)
+		{
+			currentWall->draw();
+		}
+		m_pExplosion->draw();
+		// End block
+
+		m_pFSM->render();
+		break;
+	case OPTIONS:
+		m_pFSM->render();
+		break;
+	case LOSE: // Same as Pause
+		Instance()->GetFSM().getStates().front()->render(); // Invoke Render of GameState.
+
+		// Can turn this block of code into a "render game objects" function
+		m_pBomb->draw();
+		m_pPlayer->draw();
+		for (auto& currentPowerup : m_pPowerupVec)
+		{
+			currentPowerup->draw();
+		}
 		for (auto& currentEnemy : m_pEnemyVec)
 		{
 			currentEnemy->draw();
@@ -220,6 +274,11 @@ void Game::render()
 		break;
 	default:
 		break;
+	}
+	
+	if (m_pFSM->getStates().back()->getStateType() != TITLE && m_pFSM->getStates().back()->getStateType() != OPTIONS)
+	{
+		UI::displayUI();
 	}
 
 	SDL_RenderPresent(m_pRenderer);
@@ -257,6 +316,18 @@ void Game::update()
 
 			// Explosion vs player
 			Collision::basicCollisionCheck(m_pExplosion, m_pPlayer);
+
+			// Explosion vs Enemies
+			for (auto& currentEnemy : m_pEnemyVec)
+			{
+				Collision::basicCollisionCheck(m_pExplosion, currentEnemy);
+				if (!currentEnemy->getIsActive())
+				{
+					delete currentEnemy;
+					currentEnemy = nullptr;
+				}
+				
+			}
 		}
 
 		m_pExplosion->update();
@@ -267,21 +338,71 @@ void Game::update()
 			m_pWallVec.erase(remove(m_pWallVec.begin(), m_pWallVec.end(), nullptr), m_pWallVec.end());
 		}
 
+		// Remove any defeated enemies from vector
+		if (!m_pEnemyVec.empty())
+		{
+			m_pEnemyVec.erase(remove(m_pEnemyVec.begin(), m_pEnemyVec.end(), nullptr), m_pEnemyVec.end());
+		}
+			
 		for (auto& currentEnemy : m_pEnemyVec)
 		{
 			currentEnemy->setIsColliding(Collision::tileCollisionCheck(currentEnemy, m_pGameMap->currentMap));
 			currentEnemy->update();
+			// Enemy & Player collisions
+			Collision::basicCollisionCheck(m_pPlayer, currentEnemy);
 		}
 
+		for (auto& currentPowerup : m_pPowerupVec)
+		{
+			if (Collision::basicCollisionCheck(m_pPlayer, currentPowerup) && !Collision::tileCollisionCheck(m_pPlayer, m_pGameMap->currentMap))
+			{
+				currentPowerup->setCollected();
+			}
+			currentPowerup->update();
+			if (currentPowerup->getCollected())
+			{
+				delete currentPowerup;
+				currentPowerup = nullptr;
+			}
+		}
+			
+		// Remove collected powerups
+		if (!m_pPowerupVec.empty())
+		{
+			m_pPowerupVec.erase(remove(m_pPowerupVec.begin(), m_pPowerupVec.end(), nullptr), m_pPowerupVec.end());
+
+		}
+			
 		// Player vs Wall collision checker (map based) -- Might be able to change this a bit
 		m_pPlayer->setIsColliding(Collision::tileCollisionCheck(m_pPlayer, m_pGameMap->currentMap));
 		if (m_pPlayer->getIsColliding())
 		{
 			m_pPlayer->setIsColliding(Collision::playerCollisionMovement(m_pPlayer, m_pGameMap->currentMap));
 		}
+
+		// Decrement game timer
+		if (timerCount >= timerCountMax)
+		{
+			setTimer(getTimer() - 1);
+			timerCount = 0;
+		}
+		else
+		{
+			timerCount++;
+		}
+		if (getTimer() == 0)
+		{
+			m_pPlayer->setIsActive(false);
+		}
 	}
 	break;
 	case PAUSE: // When paused only check for FSM updates
+		m_pFSM->update();
+		break;
+	case OPTIONS:
+		m_pFSM->update();
+		break;
+	case LOSE:
 		m_pFSM->update();
 		break;
 	default:
@@ -325,8 +446,8 @@ void Game::handleEvents()
 			if (event.button.button == SDL_BUTTON_RIGHT)
 			{
 				// These commented lines are to determine the current mouse position
-				// std::cout << "x: " << getMousePosition().x << std::endl;
-				// std::cout << "y: " << getMousePosition().y << std::endl;
+				std::cout << "x: " << getMousePosition().x << std::endl;
+				std::cout << "y: " << getMousePosition().y << std::endl;
 				m_bMouseBtn[1] = true;
 			}
 			break;
@@ -360,4 +481,14 @@ bool Game::getMouseBtn(int i)
 void Game::setMouseBtn(int i, bool state)
 {
 	m_bMouseBtn[i] = state;
+}
+
+int Game::getTimer()
+{
+	return gameTimer;
+}
+
+void Game::setTimer(int time)
+{
+	gameTimer = time;
 }

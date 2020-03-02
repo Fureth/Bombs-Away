@@ -47,13 +47,13 @@ bool CollisionManager::basicCollisionCheck(GameObject* object1, GameObject* obje
 			object2->setIsColliding(true);
 
 			glm::vec2 oldPosition = object1->getPreviousPosition();
-			object1->setPosition(oldPosition);
 			
 			switch (object2->getType())
 			{
 			case WALL:
-				std::cout << "Collision with Wall!" << std::endl;
-
+				//std::cout << "Collision with Wall!" << std::endl;
+				
+				object1->setPosition(oldPosition);
 				// Y-position collision check
 				if (TheGame::Instance()->checkForKeystroke(SDL_SCANCODE_W))
 				{
@@ -132,7 +132,15 @@ bool CollisionManager::basicCollisionCheck(GameObject* object1, GameObject* obje
 				break;
 			case ENEMY:
 				std::cout << "Collision with Enemy!" << std::endl;
-				object1->setIsActive(false);
+				if (object1->getType() == PLAYER && !object1->isInvul)
+				{
+					object1->changeHealth(false);
+					object1->isInvul = true;
+				}
+				break;
+			case POWERUP:
+				std::cout << "Collected powerup!\n";
+				object2->setIsColliding(false);
 				break;
 			default:
 				std::cout << "Collision with unknown type!" << std::endl;
@@ -158,14 +166,18 @@ bool CollisionManager::basicCollisionCheck(GameObject* object1, GameObject* obje
 			switch (object2->getType())
 			{
 			case WALL:
-				std::cout << "Explosion on wall!" << std::endl;
-				object2->setIsColliding(true);
+				if (object2->getHealth() == 2)
+				{
+					std::cout << "Explosion on wall!" << std::endl;
+					object2->setIsColliding(true);
+				}
 				break;
 			case PLAYER:
-				if (object2->getIsActive())
+				if (object2->getIsActive() &&  !object2->isInvul)
 				{
-					std::cout << "You die!" << std::endl;
-					object2->setIsActive(false);
+					std::cout << "You take damage!" << std::endl;
+					object2->changeHealth(false);
+					object2->isInvul = true;
 				}
 				break;
             case ENEMY:
@@ -214,9 +226,9 @@ bool CollisionManager::tileCollisionCheck(GameObject* object, int tileMap[12][20
 			int tileType = tileMap[j][i];
 			if (Game::Instance()->checkForKeystroke(SDL_SCANCODE_F))
 				std::cout << i << " " << j << std::endl;
-			if (tileType == 1) // 1 = Wall
+			if (tileType == 1 || tileType == 2 || tileType == 3 || tileType == 4 || tileType == 5) // 1 & 2 = Wall, 3 = Door
 			{
-				std::cout << "Collision with Wall!" << std::endl;
+				//std::cout << "Collision with Wall!" << std::endl;
 				if (object->getType() == ENEMY)
 				{
 					object->setPosition(object->getPreviousPosition());

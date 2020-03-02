@@ -102,3 +102,20 @@ void GameObject::setIsActive(bool active)
 {
 	m_isActive = active;
 }
+
+int GameObject::getHealth()
+{
+	return currentHealth;
+}
+
+void GameObject::changeHealth(bool lifeUp)
+{
+	if (lifeUp)
+	{
+		currentHealth++;
+	}
+	else
+	{
+		currentHealth--;
+	}
+}

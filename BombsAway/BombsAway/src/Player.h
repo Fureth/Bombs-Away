@@ -25,9 +25,12 @@ public:
     void setRequest(bool request);
 	const int m_iPlayerSpeed = 4;
 
-	
+	// Health functions
+	int getHealth();
+	void changeHealth(bool lifeUp);
 	
 private:
+
 	
     bool requestBomb = false; // This may be unneeded due to refactoring of Game.cpp
 	

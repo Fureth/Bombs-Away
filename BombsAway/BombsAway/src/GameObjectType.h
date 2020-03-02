@@ -7,5 +7,6 @@ enum GameObjectType {
 	EXPLOSION,
 	BACKGROUND,
 	ENEMY,
+	POWERUP,
 	NUM_OF_TYPES
 };

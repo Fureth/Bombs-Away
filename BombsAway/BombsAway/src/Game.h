@@ -16,6 +16,7 @@
 #include "TextureManager.h"
 #include "CollisionManager.h"
 #include "SoundManager.h"
+#include "UIManager.h"
 
 // Game Objects
 #include "Player.h"
@@ -25,6 +26,7 @@
 #include "Explosion.h"
 #include "Enemy.h"
 #include "Wall.h"
+#include "Powerup.h"
 
 const int FPS = 60;
 const int WINDOW_WIDTH = 1280;
@@ -87,10 +89,17 @@ public:
 	Explosion* getExplosionObject();
 	std::vector<Wall*>* getWallVector(); // Returns pointer to wall vector (of pointers to wall objects)
 	std::vector<Enemy*>* getEnemyVector(); // Returns pointer to enemy vector
+	std::vector<Powerup*>* getPowerupVector();
 
 	// Mousebutton getter/setter
 	bool getMouseBtn(int i);
 	void setMouseBtn(int i, bool state);
+
+	// Game timer + getter/setter
+	int getTimer();
+	void setTimer(int time);
+	int timerCount = 0;
+	const int timerCountMax = 60;
 
 private:
 	Game();
@@ -101,7 +110,8 @@ private:
 	FSM* m_pFSM; // Pointer to a state machine instance.
 	
 	int m_currentFrame;
-
+	int gameTimer = 0;
+	
 	bool m_bRunning;
 
 	bool m_bObjectsCreated = false; // Bool is set to true when game objects are created, set to false when they are deleted.
@@ -117,13 +127,14 @@ private:
 	Bomb* m_pBomb; // May need to make a vector later
 	Explosion* m_pExplosion; // May need to make a vector later
 
-
-
 	// Vector of Wall GameObjects
 	std::vector<Wall*> m_pWallVec;
 
 	// Vector of Enemy GameObjects
 	std::vector<Enemy*> m_pEnemyVec;
+
+	// Vector of Powerup GameObjects
+	std::vector<Powerup*> m_pPowerupVec;
 	
 	const Uint8* m_iKeystates; // Keyboard state container.
 	

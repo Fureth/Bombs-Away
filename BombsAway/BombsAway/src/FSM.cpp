@@ -40,11 +40,11 @@ void PauseState::update()
 {
 	if (Game::Instance()->getMouseBtn(0))
 	{
-		if ((506 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 765) && (358 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 436))
+		if ((506 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 765) && (458 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 536))
 		{
 			Game::Instance()->GetFSM().popState();
 		}
-		else if ((508 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 763) && (459 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 533))
+		else if ((508 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 763) && (559 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 633))
 		{
 			Game::Instance()->setMouseBtn(0, false);
 			Game::Instance()->GetFSM().popState();
@@ -56,8 +56,7 @@ void PauseState::update()
 
 void PauseState::render()
 {
-	TheTextureManager::Instance()->draw("pause", 320, 192, TheGame::Instance()->getRenderer(), false);
-	//State::render();
+	TheTextureManager::Instance()->draw("pause", 320, 292, TheGame::Instance()->getRenderer(), false);
 }
 
 void PauseState::exit()
@@ -73,7 +72,7 @@ GameState::GameState()
 	std::cout << "Rendering Game..." << std::endl;
 	TheTextureManager::Instance()->load("../Assets/textures/Game.png", "game", TheGame::Instance()->getRenderer());
 
-	TheSoundManager::Instance()->load("../Assets/audio/backgroundMusic.WAV",
+	TheSoundManager::Instance()->load("../Assets/audio/nya.WAV",
 		"bgm", sound_type::SOUND_MUSIC);
 
 	TheSoundManager::Instance()->playMusic("bgm", -1);
@@ -91,6 +90,11 @@ void GameState::update()
 	if (Game::Instance()->checkForKeystroke(SDL_SCANCODE_P))
 	{
 		Game::Instance()->GetFSM().pushState(new PauseState());
+	}
+	if (Game::Instance()->getPlayerObject()->getIsActive() == false) // If player is dead...
+	{
+		// Game Over!
+		Game::Instance()->GetFSM().pushState(new LoseState());
 	}
 }
 
@@ -140,9 +144,7 @@ void TitleState::update()
 		else if ((416 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 755) && (720 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 835))
 		{
 			// Controls page
-			std::cout << "There is no controls page at this moment!" << std::endl;
-			std::cout << "Movement: W = up, A = left, S = down, D = right" << std::endl;
-			std::cout << "Press space to lay a bomb, and \'p\' to pause" << std::endl;
+			Game::Instance()->GetFSM().changeState(new OptionsState());
 		}
 	}
 }
@@ -157,7 +159,81 @@ void TitleState::exit()
 {
 	std::cout << "Exiting Title..." << std::endl;
 }
-// End TitleState.
+// End Title
+
+// Begin Options (labeled as this in case we decide to change to options rather than just controls later)
+OptionsState::OptionsState()
+{
+	std::cout << "Rendering Controls...\n";
+	TheTextureManager::Instance()->load("../Assets/textures/Controls.png", "controls", TheGame::Instance()->getRenderer());
+	setType(OPTIONS);
+}
+
+void OptionsState::enter()
+{
+	std::cout << "Entering Controls..." << std::endl;
+}
+
+void OptionsState::update()
+{
+	if (Game::Instance()->getMouseBtn(0))
+	{
+		if ((1024 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 1244) && (28 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 100))
+		{
+			// Back to Title page
+			Game::Instance()->GetFSM().changeState(new TitleState());
+		}
+	}
+}
+
+void OptionsState::render()
+{
+	TheTextureManager::Instance()->draw("controls", 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, TheGame::Instance()->getRenderer());
+}
+
+void OptionsState::exit()
+{
+	std::cout << "Exiting Controls..." << std::endl;
+}
+// End Options
+
+// Begin Lose
+LoseState::LoseState()
+{
+	std::cout << "Rendering GameOver..." << std::endl;
+	TheTextureManager::Instance()->load("../Assets/textures/GameOver.png", "lose", TheGame::Instance()->getRenderer());
+	setType(LOSE);
+}
+
+void LoseState::enter()
+{
+	std::cout << "Entering GameOver..." << std::endl;
+}
+
+void LoseState::update()
+{
+	if (Game::Instance()->getMouseBtn(0))
+	{
+		if ((732 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 1126) && (664 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 768))
+		{
+			Game::Instance()->setMouseBtn(0, false);
+			Game::Instance()->GetFSM().popState();
+			Game::Instance()->GetFSM().changeState(new TitleState());
+			Game::Instance()->deleteGameObjects();
+		}
+	}
+}
+
+void LoseState::render()
+{
+	TheTextureManager::Instance()->draw("lose", 140, 378, 1000, 400, TheGame::Instance()->getRenderer());
+}
+
+void LoseState::exit()
+{
+	std::cout << "Exiting To Title..." << std::endl;
+}
+// End Lose
 
 // Begin FSM.
 FSM::FSM() {}

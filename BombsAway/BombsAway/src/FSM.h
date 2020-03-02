@@ -54,6 +54,26 @@ public:
 	void exit();
 };
 
+class OptionsState : public State
+{
+public:
+	OptionsState();
+	void enter();
+	void update();
+	void render();
+	void exit();
+};
+
+class LoseState : public State
+{
+public:
+	LoseState();
+	void enter();
+	void update();
+	void render();
+	void exit();
+};
+
 class FSM
 {
 private:

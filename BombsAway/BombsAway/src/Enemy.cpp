@@ -14,6 +14,7 @@ Enemy::Enemy(glm::vec2 startPos)
 	setIsColliding(false);
 	setType(ENEMY);
 	randomizeDirection();
+	currentHealth = 1;
 }
 
 Enemy::~Enemy()
@@ -27,13 +28,17 @@ void Enemy::draw()
 
 void Enemy::update()
 {
-	// If colliding, change direction
-	if (getIsColliding())
+	if (getIsActive())
 	{
-		changeDirection();
-		setIsColliding(false);
+		// If colliding, change direction
+		if (getIsColliding())
+		{
+			changeDirection();
+			setIsColliding(false);
+		}
+		wander();
 	}
-	wander();
+	
 }
 
 void Enemy::clean()

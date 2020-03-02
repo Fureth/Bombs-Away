@@ -13,6 +13,7 @@ Player::Player()
 	setHeight(size.y);
 	setIsColliding(false);
 	setType(GameObjectType::PLAYER);
+	currentHealth = 3;
 }
 
 Player::~Player()
@@ -23,6 +24,7 @@ void Player::draw()
 {
 	if (getIsActive())
 	{
+		if (!isInvul || invFrame % 60 > 10)
 		TheTextureManager::Instance()->draw("player", getPosition().x, getPosition().y, TheGame::Instance()->getRenderer(), false);
 	}
 }
@@ -80,6 +82,26 @@ void Player::update()
 				}
 			}
 		}
+
+		// Check I-Frames
+		if (isInvul)
+		{
+			if (invFrame < invFrameMax)
+			{
+				invFrame++;
+			}
+			else if (invFrame >= invFrameMax)
+			{
+				isInvul = false;
+				invFrame = 0;
+			}
+		}
+
+		// Check HP
+		if (currentHealth == 0)
+		{
+			setIsActive(false);
+		}
 	}
 }
 
@@ -95,5 +117,22 @@ bool Player::getRequest()
 void Player::setRequest(bool request)
 {
     requestBomb = request;
+}
+
+int Player::getHealth()
+{
+	return currentHealth;
+}
+
+void Player::changeHealth(bool lifeUp)
+{
+	if (lifeUp && currentHealth < 3)
+	{
+		currentHealth++;
+	}
+	else if (!lifeUp && currentHealth != 0)
+	{
+		currentHealth--;
+	}
 }
 

@@ -8,7 +8,7 @@
 class Wall : public GameObject {
 public:
     Wall();
-	Wall(int xPos, int yPos);
+	Wall(int xPos, int yPos, int wallType);
     ~Wall();
 
     // Draw the object

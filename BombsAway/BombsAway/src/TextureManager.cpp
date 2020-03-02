@@ -38,8 +38,15 @@ void TextureManager::draw(std::string id, int x, int y, int width, int height, S
 	SDL_Rect destRect;
 	srcRect.x = 0;
 	srcRect.y = 0;
-	srcRect.w = destRect.w = width;
-	srcRect.h = destRect.h = height;
+	
+	int textureWidth, textureHeight;
+
+	SDL_QueryTexture(m_textureMap[id], NULL, NULL, &textureWidth, &textureHeight);
+	
+	srcRect.w = textureWidth;
+	destRect.w = width;
+	srcRect.h = textureHeight;
+	destRect.h = height;
 	destRect.x = x;
 	destRect.y = y;
 	SDL_RenderCopyEx(pRenderer, m_textureMap[id], &srcRect, &destRect, 0, 0, flip);

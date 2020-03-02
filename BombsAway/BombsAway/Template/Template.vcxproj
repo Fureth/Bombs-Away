@@ -29,8 +29,10 @@
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Player.cpp" />
     <ClCompile Include="..\src\Map.cpp" />
+    <ClCompile Include="..\src\Powerup.cpp" />
     <ClCompile Include="..\src\SoundManager.cpp" />
     <ClCompile Include="..\src\TextureManager.cpp" />
+    <ClCompile Include="..\src\UIManager.cpp" />
     <ClCompile Include="..\src\Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -41,10 +43,14 @@
     <ClInclude Include="..\src\FSM.h" />
     <ClInclude Include="..\src\Game.h" />
     <ClInclude Include="..\src\GameObject.h" />
+    <ClInclude Include="..\src\GameObjectType.h" />
     <ClInclude Include="..\src\Map.h" />
     <ClInclude Include="..\src\Player.h" />
+    <ClInclude Include="..\src\Powerup.h" />
     <ClInclude Include="..\src\SoundManager.h" />
+    <ClInclude Include="..\src\StateType.h" />
     <ClInclude Include="..\src\TextureManager.h" />
+    <ClInclude Include="..\src\UIManager.h" />
     <ClInclude Include="..\src\Wall.h" />
   </ItemGroup>
   <ItemGroup>

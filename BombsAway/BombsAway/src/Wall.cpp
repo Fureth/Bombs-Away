@@ -12,14 +12,16 @@ Wall::Wall()
     setType(GameObjectType::WALL);
 }
 
-Wall::Wall(int xPos, int yPos)
+// Health indicates wall types: 0 = door, 1 = unbreakable, 2 = breakable
+Wall::Wall(int xPos, int yPos, int wallType)
 {
-	TheTextureManager::Instance()->load("../Assets/textures/wall.png", "wall", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("../Assets/textures/wallsanddoor.png", "wallsanddoor", TheGame::Instance()->getRenderer());
 
 	this->xPos = xPos;
 	this->yPos = yPos;
+	this->currentHealth = wallType;
 	
-	glm::vec2 size = TheTextureManager::Instance()->getTextureSize("wall");
+	glm::vec2 size = glm::vec2(64, 64);
 	setWidth(size.x);
 	setHeight(size.y);
 	setIsColliding(false);
@@ -34,7 +36,7 @@ void Wall::draw()
 {
 	if (!isDestroyed)
 	{
-		TheTextureManager::Instance()->draw("wall", getPosition().x, getPosition().y, TheGame::Instance()->getRenderer(), false);
+		TheTextureManager::Instance()->drawFrame("wallsanddoor", getPosition().x, getPosition().y, 64, 64, this->currentHealth + 1, 0, TheGame::Instance()->getRenderer());
 	}
 }
 

@@ -45,6 +45,15 @@ public:
 
 	bool getIsActive();
 	void setIsActive(bool active);
+
+	// Health functions
+	virtual int getHealth();
+	virtual void changeHealth(bool lifeUp);
+	// Health variables
+	int currentHealth;
+	int invFrame = 0;
+	const int invFrameMax = 180;
+	bool isInvul = false;
 	
 private:
 	// transform variables
@@ -70,6 +79,7 @@ private:
 	bool m_isActive;
 	bool m_isColliding;
 	GameObjectType m_type;
+
 };
 
 #endif 
