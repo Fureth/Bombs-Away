@@ -3,10 +3,10 @@
 
 Explosion::Explosion()
 {
-	TheTextureManager::Instance()->load("../Assets/textures/explosion.png", "explosion", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("../Assets/textures/explosion sprite.png", "explosion", TheGame::Instance()->getRenderer());
 	setPosition(glm::vec2(0, 0));
 
-	glm::vec2 size = TheTextureManager::Instance()->getTextureSize("explosion");
+	glm::vec2 size = glm::vec2(128, 128);
 	setWidth(size.x);
 	setHeight(size.y);
 	setIsColliding(false);
@@ -21,7 +21,42 @@ void Explosion::draw()
 {
 	if (getExplosion())
 	{
-		TheTextureManager::Instance()->draw("explosion", getPosition().x, getPosition().y, TheGame::Instance()->getRenderer(), false);
+		int frameSelector = explosionTimer / 6;
+		switch (frameSelector)
+		{
+		case 0:
+			TheTextureManager::Instance()->drawFrame("explosion", getPosition().x, getPosition().y, 128, 128, 1, 0, TheGame::Instance()->getRenderer());
+			break;
+		case 1:
+			TheTextureManager::Instance()->drawFrame("explosion", getPosition().x, getPosition().y, 128, 128, 1, 1, TheGame::Instance()->getRenderer());
+			break;
+		case 2:
+			TheTextureManager::Instance()->drawFrame("explosion", getPosition().x, getPosition().y, 128, 128, 1, 2, TheGame::Instance()->getRenderer());
+			break;
+		case 3:
+			TheTextureManager::Instance()->drawFrame("explosion", getPosition().x, getPosition().y, 128, 128, 2, 0, TheGame::Instance()->getRenderer());
+			break;
+		case 4:
+			TheTextureManager::Instance()->drawFrame("explosion", getPosition().x, getPosition().y, 128, 128, 2, 1, TheGame::Instance()->getRenderer());
+			break;
+		case 5:
+			TheTextureManager::Instance()->drawFrame("explosion", getPosition().x, getPosition().y, 128, 128, 2, 2, TheGame::Instance()->getRenderer());
+			break;
+		case 6:
+			TheTextureManager::Instance()->drawFrame("explosion", getPosition().x, getPosition().y, 128, 128, 3, 0, TheGame::Instance()->getRenderer());
+			break;
+		case 7:
+			TheTextureManager::Instance()->drawFrame("explosion", getPosition().x, getPosition().y, 128, 128, 3, 1, TheGame::Instance()->getRenderer());
+			break;
+		case 8:
+			TheTextureManager::Instance()->drawFrame("explosion", getPosition().x, getPosition().y, 128, 128, 3, 2, TheGame::Instance()->getRenderer());
+			break;
+		case 9:
+			TheTextureManager::Instance()->drawFrame("explosion", getPosition().x, getPosition().y, 128, 128, 4, 0, TheGame::Instance()->getRenderer());
+			break;
+		default:
+			break;
+		}
 	}
 }
 
