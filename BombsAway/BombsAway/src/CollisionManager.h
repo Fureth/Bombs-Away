@@ -6,7 +6,7 @@
 #include <iostream>
 
 #include "GameObject.h"
-#include <GLM/gtx/norm.hpp>
+#include <glm/gtx/norm.hpp>
 #include <SDL.h>
 #include "Game.h"
 

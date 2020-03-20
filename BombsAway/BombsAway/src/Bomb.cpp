@@ -70,3 +70,13 @@ bool Bomb::getExplode()
 {
 	return hasExploded;
 }
+
+Direction Bomb::getThrownFrom()
+{
+	return thrownFrom;
+}
+
+void Bomb::setThrownFrom(Direction thrown)
+{
+	thrownFrom = thrown;
+}

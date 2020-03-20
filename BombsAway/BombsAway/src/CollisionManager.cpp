@@ -190,6 +190,15 @@ bool CollisionManager::basicCollisionCheck(GameObject* object1, GameObject* obje
 			}
 		}
 	}
+
+	// Bomb based collisions
+	if (object1->getType() == BOMB)
+	{
+		if (!(obj1Top >= obj2Bottom || obj1Bottom <= obj2Top || obj1Left >= obj2Right || obj1Right <= obj2Left))
+		{
+			return true;
+		}
+	}
 	return false;
 }
 

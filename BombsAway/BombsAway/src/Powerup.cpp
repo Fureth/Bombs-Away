@@ -22,7 +22,14 @@ void Powerup::draw()
 {
 	if (!getCollected())
 	{
-		TheTextureManager::Instance()->drawFrame("items", getPosition().x, getPosition().y, 64, 64, this->currentHealth + 1, 0, TheGame::Instance()->getRenderer());
+		if (currentHealth <= 1)
+		{
+			TheTextureManager::Instance()->drawFrame("items", getPosition().x, getPosition().y, 64, 64, this->currentHealth + 1, 0, TheGame::Instance()->getRenderer());
+		}
+		else if (currentHealth == 2)
+		{
+			TheTextureManager::Instance()->drawFrame("items", getPosition().x, getPosition().y, 64, 64, this->currentHealth, 0, TheGame::Instance()->getRenderer());
+		}
 	}
 }
 
@@ -37,6 +44,9 @@ void Powerup::update()
 			break;
 		case 1: // Key
 			// Add some way to trigger door, maybe a boolean flag within class?
+			break;
+		case 2: // Throwable bomb powerup
+			TheGame::Instance()->getPlayerObject()->setThrow(true);
 			break;
 		default:
 			break;

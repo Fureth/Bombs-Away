@@ -24,6 +24,18 @@ Enemy::~Enemy()
 void Enemy::draw()
 {
 	TheTextureManager::Instance()->draw("enemy", getPosition().x, getPosition().y, 64, 64, TheGame::Instance()->getRenderer());
+	int frameSelector = roamTimer / 10;
+	switch (frameSelector)
+	{
+	case 0:
+		TheTextureManager::Instance()->drawFrame("enemy", getPosition().x, getPosition().y, 64, 64, 1, 0, TheGame::Instance()->getRenderer());
+		break;
+	case 1:
+		TheTextureManager::Instance()->drawFrame("enemy", getPosition().x, getPosition().y, 64, 64, 2, 0, TheGame::Instance()->getRenderer());
+		break;
+	default:
+		break;
+	}
 }
 
 void Enemy::update()
@@ -38,7 +50,14 @@ void Enemy::update()
 		}
 		wander();
 	}
-	
+	if (roamTimer < roamTimerMax)
+	{
+		roamTimer++;
+	}
+	else
+	{
+		roamTimer = 0;
+	}
 }
 
 void Enemy::clean()
@@ -64,6 +83,7 @@ void Enemy::wander()
 		break;
 	case WEST: // Subtract x
 		setPosition(glm::vec2(getPosition().x - getVelocity().x, getPosition().y));
+		
 		break;
 	default:
 		break;
@@ -124,15 +144,19 @@ void Enemy::changeDirection()
 		{
 		case 0:
 			currentDirection = NORTH;
+			TheTextureManager::Instance()->load("../Assets/textures/walk-back.png", "enemy", TheGame::Instance()->getRenderer());
 			break;
 		case 1:
 			currentDirection = EAST;
+			TheTextureManager::Instance()->load("../Assets/textures/walk-right.png", "enemy", TheGame::Instance()->getRenderer());
 			break;
 		case 2:
 			currentDirection = SOUTH;
+			TheTextureManager::Instance()->load("../Assets/textures/walk-front.png", "enemy", TheGame::Instance()->getRenderer());
 			break;
 		case 3:
 			currentDirection = WEST;
+			TheTextureManager::Instance()->load("../Assets/textures/walk-left.png", "enemy", TheGame::Instance()->getRenderer());
 			break;
 		default:
 			currentDirection = NORTH;

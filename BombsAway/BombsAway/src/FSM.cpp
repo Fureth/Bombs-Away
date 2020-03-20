@@ -138,6 +138,7 @@ void TitleState::update()
 		if ((408 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 759) && (550 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 670))
 		{
 			// Start new game
+			Game::Instance()->setCurrentLevel(1);
 			Game::Instance()->GetFSM().changeState(new GameState());
 			Game::Instance()->createGameObjects();
 		}
@@ -146,6 +147,12 @@ void TitleState::update()
 			// Controls page
 			Game::Instance()->GetFSM().changeState(new OptionsState());
 		}
+	}
+	if (Game::Instance()->checkForKeystroke(SDL_SCANCODE_SEMICOLON))
+	{
+		Game::Instance()->setCurrentLevel(-1);
+		Game::Instance()->GetFSM().changeState(new Dev());
+		Game::Instance()->createGameObjects();
 	}
 }
 
@@ -302,4 +309,32 @@ vector<State*>& FSM::getStates()
 	return m_vStates;
 }
 
+
+
 // End FSM.
+
+// Begin Dev State
+
+Dev::Dev()
+{
+	setType(TEST);
+}
+
+void Dev::enter()
+{
+	std::cout << "Entering Dev Mode...\n";
+}
+
+void Dev::update()
+{
+}
+
+void Dev::render()
+{
+}
+
+void Dev::exit()
+{
+}
+
+// End Dev State

@@ -69,8 +69,7 @@ public:
 
 	// a function to access the private running variable
 	bool running() { return m_bRunning; }
-
-
+	
 	// getters
 	SDL_Renderer* getRenderer();
 	glm::vec2 getMousePosition();
@@ -82,6 +81,9 @@ public:
 	void createGameObjects();
 	void deleteGameObjects();
 	bool getObjectsCreated();
+	// Update and Render functions which affect all game objects
+	void updateGameObjects();
+	void renderGameObjects();
 
 	// Functions which return pointers to game objects for use in other classes (Currently unused ones are commented out)
 	Player* getPlayerObject();
@@ -101,6 +103,10 @@ public:
 	int timerCount = 0;
 	const int timerCountMax = 60;
 
+	// Level Select Getter/Setter
+	int getCurrentLevel();
+	void setCurrentLevel(int newLevel);
+
 private:
 	Game();
 	~Game();
@@ -111,6 +117,7 @@ private:
 	
 	int m_currentFrame;
 	int gameTimer = 0;
+	int m_currentLevel = 0; // Int used to select which level map to load
 	
 	bool m_bRunning;
 
@@ -139,6 +146,8 @@ private:
 	const Uint8* m_iKeystates; // Keyboard state container.
 	
 	glm::vec2 m_mousePosition; // Holds vector of mouse position on screen.
+
+	
 };
 
 typedef Game TheGame;

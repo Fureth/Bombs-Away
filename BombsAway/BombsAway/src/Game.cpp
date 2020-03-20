@@ -26,6 +26,16 @@ bool Game::checkForKeystroke(SDL_Scancode c)
 	return false;
 }
 
+int Game::getCurrentLevel()
+{
+	return m_currentLevel;
+}
+
+void Game::setCurrentLevel(int newLevel)
+{
+	m_currentLevel = newLevel;
+}
+
 Game::Game()
 {
 	m_iKeystates = SDL_GetKeyboardState(nullptr); // start reading keyboard states, returns pointer
@@ -40,18 +50,42 @@ void Game::createGameObjects()
 {
 	if (!m_bObjectsCreated)
 	{
+		// Create most objects
 		m_pPlayer = new Player();
 		m_pBomb = new Bomb();
 		m_pExplosion = new Explosion();
 		m_pGameMap = new Map();
 
-		m_pGameMap->LoadMap(firstLevel);
+		// Select which map to load and "draw" it
+		switch (getCurrentLevel())
+		{
+		case 1:
+			m_pGameMap->LoadMap(firstLevel);
+			setTimer(99);
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case -1:
+			m_pGameMap->LoadMap(test);
+			setTimer(999);
+			break;
+		default:
+			std::cout << "Error Loading Level. Shutting Down...";
+			m_bRunning = false;
+			break;
+		}
 		m_pGameMap->DrawMap();
 
-		setTimer(99);
 		timerCount = 0;
 
 		m_bObjectsCreated = true;
+
+		TheSoundManager::Instance()->load("../Assets/audios/nya.mp3",
+			"bgm", sound_type::SOUND_MUSIC);
+
+		TheSoundManager::Instance()->playMusic("bgm", -1);
 	}
 }
 
@@ -203,47 +237,11 @@ void Game::render()
 		break;
 	case GAME: // Renders game background and all game objects.
 		m_pFSM->render();
-
-		// Can turn this block of code into a "render game objects" function
-		m_pBomb->draw();
-		m_pPlayer->draw();
-		for (auto& currentPowerup : m_pPowerupVec)
-		{
-			currentPowerup->draw();
-		}
-		for (auto& currentEnemy : m_pEnemyVec)
-		{
-			currentEnemy->draw();
-		}
-		for (auto& currentWall : m_pWallVec)
-		{
-			currentWall->draw();
-		}
-		m_pExplosion->draw();
-		// End block
-
+		renderGameObjects();
 		break;
 	case PAUSE: // Renders game background and all game objects, as well as the pause screen on top.
 		Instance()->GetFSM().getStates().front()->render(); // Invoke Render of GameState.
-
-		// Can turn this block of code into a "render game objects" function
-		m_pBomb->draw();
-		m_pPlayer->draw();
-		for (auto& currentPowerup : m_pPowerupVec)
-		{
-			currentPowerup->draw();
-		}
-		for (auto& currentEnemy : m_pEnemyVec)
-		{
-			currentEnemy->draw();
-		}
-		for (auto& currentWall : m_pWallVec)
-		{
-			currentWall->draw();
-		}
-		m_pExplosion->draw();
-		// End block
-
+		renderGameObjects();
 		m_pFSM->render();
 		break;
 	case OPTIONS:
@@ -251,26 +249,11 @@ void Game::render()
 		break;
 	case LOSE: // Same as Pause
 		Instance()->GetFSM().getStates().front()->render(); // Invoke Render of GameState.
-
-		// Can turn this block of code into a "render game objects" function
-		m_pBomb->draw();
-		m_pPlayer->draw();
-		for (auto& currentPowerup : m_pPowerupVec)
-		{
-			currentPowerup->draw();
-		}
-		for (auto& currentEnemy : m_pEnemyVec)
-		{
-			currentEnemy->draw();
-		}
-		for (auto& currentWall : m_pWallVec)
-		{
-			currentWall->draw();
-		}
-		m_pExplosion->draw();
-		// End block
-
+		renderGameObjects();
 		m_pFSM->render();
+		break;
+	case TEST:
+		renderGameObjects();
 		break;
 	default:
 		break;
@@ -293,109 +276,8 @@ void Game::update()
 		m_pFSM->update();
 		break;
 	case GAME: // Must update all game objects when in the game, and also check for FSM updates
-	{
-		m_pFSM->update();
-		m_pPlayer->update();
-		m_pBomb->update();
-
-		// Might be able to move this into explosion class, although it seems unlikely due to collision calls
-		if (m_pExplosion->getExplosion())
-		{
-			// Explosion vs Wall
-			for (auto& currentWall : m_pWallVec)
-			{
-				Collision::basicCollisionCheck(m_pExplosion, currentWall);
-				currentWall->update();
-				if (currentWall->getDestruction())
-				{
-					m_pGameMap->currentMap[currentWall->getY()][currentWall->getX()] = 0;
-					delete currentWall;
-					currentWall = nullptr;
-				}
-			}
-
-			// Explosion vs player
-			Collision::basicCollisionCheck(m_pExplosion, m_pPlayer);
-
-			// Explosion vs Enemies
-			for (auto& currentEnemy : m_pEnemyVec)
-			{
-				Collision::basicCollisionCheck(m_pExplosion, currentEnemy);
-				if (!currentEnemy->getIsActive())
-				{
-					delete currentEnemy;
-					currentEnemy = nullptr;
-				}
-				
-			}
-		}
-
-		m_pExplosion->update();
-
-		// Remove any destroyed walls from vector
-		if (!m_pWallVec.empty())
-		{
-			m_pWallVec.erase(remove(m_pWallVec.begin(), m_pWallVec.end(), nullptr), m_pWallVec.end());
-		}
-
-		// Remove any defeated enemies from vector
-		if (!m_pEnemyVec.empty())
-		{
-			m_pEnemyVec.erase(remove(m_pEnemyVec.begin(), m_pEnemyVec.end(), nullptr), m_pEnemyVec.end());
-		}
-			
-		for (auto& currentEnemy : m_pEnemyVec)
-		{
-			currentEnemy->setIsColliding(Collision::tileCollisionCheck(currentEnemy, m_pGameMap->currentMap));
-			currentEnemy->update();
-			// Enemy & Player collisions
-			Collision::basicCollisionCheck(m_pPlayer, currentEnemy);
-		}
-
-		for (auto& currentPowerup : m_pPowerupVec)
-		{
-			if (Collision::basicCollisionCheck(m_pPlayer, currentPowerup) && !Collision::tileCollisionCheck(m_pPlayer, m_pGameMap->currentMap))
-			{
-				currentPowerup->setCollected();
-			}
-			currentPowerup->update();
-			if (currentPowerup->getCollected())
-			{
-				delete currentPowerup;
-				currentPowerup = nullptr;
-			}
-		}
-			
-		// Remove collected powerups
-		if (!m_pPowerupVec.empty())
-		{
-			m_pPowerupVec.erase(remove(m_pPowerupVec.begin(), m_pPowerupVec.end(), nullptr), m_pPowerupVec.end());
-
-		}
-			
-		// Player vs Wall collision checker (map based) -- Might be able to change this a bit
-		m_pPlayer->setIsColliding(Collision::tileCollisionCheck(m_pPlayer, m_pGameMap->currentMap));
-		if (m_pPlayer->getIsColliding())
-		{
-			m_pPlayer->setIsColliding(Collision::playerCollisionMovement(m_pPlayer, m_pGameMap->currentMap));
-		}
-
-		// Decrement game timer
-		if (timerCount >= timerCountMax)
-		{
-			setTimer(getTimer() - 1);
-			timerCount = 0;
-		}
-		else
-		{
-			timerCount++;
-		}
-		if (getTimer() == 0)
-		{
-			m_pPlayer->setIsActive(false);
-		}
-	}
-	break;
+		updateGameObjects();
+		break;
 	case PAUSE: // When paused only check for FSM updates
 		m_pFSM->update();
 		break;
@@ -404,6 +286,9 @@ void Game::update()
 		break;
 	case LOSE:
 		m_pFSM->update();
+		break;
+	case TEST:
+		updateGameObjects();
 		break;
 	default:
 		break;
@@ -491,4 +376,150 @@ int Game::getTimer()
 void Game::setTimer(int time)
 {
 	gameTimer = time;
+}
+
+void Game::updateGameObjects()
+{
+	m_pFSM->update();
+	m_pPlayer->update();
+	m_pBomb->update();
+
+	// Might be able to move this into explosion class, although it seems unlikely due to collision calls
+	if (m_pExplosion->getExplosion())
+	{
+		// Explosion vs Wall
+		for (auto& currentWall : m_pWallVec)
+		{
+			Collision::basicCollisionCheck(m_pExplosion, currentWall);
+			currentWall->update();
+			if (currentWall->getDestruction())
+			{
+				m_pGameMap->currentMap[currentWall->getY()][currentWall->getX()] = 0;
+				delete currentWall;
+				currentWall = nullptr;
+			}
+		}
+
+		// Explosion vs player
+		Collision::basicCollisionCheck(m_pExplosion, m_pPlayer);
+
+		// Explosion vs Enemies
+		for (auto& currentEnemy : m_pEnemyVec)
+		{
+			Collision::basicCollisionCheck(m_pExplosion, currentEnemy);
+			if (!currentEnemy->getIsActive())
+			{
+				delete currentEnemy;
+				currentEnemy = nullptr;
+			}
+
+		}
+	}
+
+	m_pExplosion->update();
+
+	// Remove any destroyed walls from vector
+	if (!m_pWallVec.empty())
+	{
+		m_pWallVec.erase(remove(m_pWallVec.begin(), m_pWallVec.end(), nullptr), m_pWallVec.end());
+	}
+
+	// Remove any defeated enemies from vector
+	if (!m_pEnemyVec.empty())
+	{
+		m_pEnemyVec.erase(remove(m_pEnemyVec.begin(), m_pEnemyVec.end(), nullptr), m_pEnemyVec.end());
+	}
+
+	for (auto& currentEnemy : m_pEnemyVec)
+	{
+		currentEnemy->setIsColliding(Collision::tileCollisionCheck(currentEnemy, m_pGameMap->currentMap));
+		currentEnemy->update();
+		// Enemy & Player collisions
+		Collision::basicCollisionCheck(m_pPlayer, currentEnemy);
+	}
+
+	for (auto& currentPowerup : m_pPowerupVec)
+	{
+		if (Collision::basicCollisionCheck(m_pPlayer, currentPowerup) && !Collision::tileCollisionCheck(m_pPlayer, m_pGameMap->currentMap))
+		{
+			currentPowerup->setCollected();
+		}
+		currentPowerup->update();
+		if (currentPowerup->getCollected())
+		{
+			delete currentPowerup;
+			currentPowerup = nullptr;
+		}
+	}
+
+	// Remove collected powerups
+	if (!m_pPowerupVec.empty())
+	{
+		m_pPowerupVec.erase(remove(m_pPowerupVec.begin(), m_pPowerupVec.end(), nullptr), m_pPowerupVec.end());
+
+	}
+
+	// Bomb collision (ensure bomb is not in wall from throwing bomb)
+	for (auto& currentWall : m_pWallVec)
+	{
+		if (Collision::basicCollisionCheck(m_pBomb, currentWall))
+		{
+			switch (m_pBomb->getThrownFrom())
+			{
+			case NORTH:
+				m_pBomb->setPosition(glm::vec2(m_pBomb->getPosition().x, currentWall->getPosition().y + 64));
+				break;
+			case SOUTH:
+				m_pBomb->setPosition(glm::vec2(m_pBomb->getPosition().x, currentWall->getPosition().y - 64));
+				break;
+			case WEST:
+				m_pBomb->setPosition(glm::vec2(currentWall->getPosition().x + 64, m_pBomb->getPosition().y));
+				break;
+			case EAST:
+				m_pBomb->setPosition(glm::vec2(currentWall->getPosition().x - 64, m_pBomb->getPosition().y));
+				break;
+			}
+		}
+	}
+	
+	// Player vs Wall collision checker (map based) -- Might be able to change this a bit
+	m_pPlayer->setIsColliding(Collision::tileCollisionCheck(m_pPlayer, m_pGameMap->currentMap));
+	if (m_pPlayer->getIsColliding())
+	{
+		m_pPlayer->setIsColliding(Collision::playerCollisionMovement(m_pPlayer, m_pGameMap->currentMap));
+	}
+
+	// Decrement game timer
+	if (timerCount >= timerCountMax)
+	{
+		setTimer(getTimer() - 1);
+		timerCount = 0;
+	}
+	else
+	{
+		timerCount++;
+	}
+	if (getTimer() == 0)
+	{
+		m_pPlayer->setIsActive(false);
+	}
+}
+
+void Game::renderGameObjects()
+{
+	m_pBomb->draw();
+	m_pPlayer->draw();
+	for (auto& currentPowerup : m_pPowerupVec)
+	{
+		currentPowerup->draw();
+	}
+	for (auto& currentEnemy : m_pEnemyVec)
+	{
+		currentEnemy->draw();
+	}
+	for (auto& currentWall : m_pWallVec)
+	{
+		currentWall->draw();
+	}
+	m_pExplosion->draw();
 }
