@@ -167,6 +167,11 @@ std::vector<Powerup*>* Game::getPowerupVector()
 	return &m_pPowerupVec;
 }
 
+std::vector<Hole*>* Game::getHoleVector()
+{
+	return &m_pHoleVec;
+}
+
 bool Game::init(const char* title, int xpos, int ypos, int height, int width, bool fullscreen)
 {
 	int flags = 0;
@@ -481,6 +486,18 @@ void Game::updateGameObjects()
 			}
 		}
 	}
+	if (m_pBomb->bombTossMove == 0)
+	{
+		for (auto& currentHole : m_pHoleVec)
+		{
+			if (Collision::basicCollisionCheck(m_pBomb, currentHole) && m_pBomb->getBomb())
+			{
+				m_pBomb->setBomb(false);
+				m_pBomb->bombTimer = 0;
+			}
+		}
+	}
+
 	
 	// Player vs Wall collision checker (map based) -- Might be able to change this a bit
 	m_pPlayer->setIsColliding(Collision::tileCollisionCheck(m_pPlayer, m_pGameMap->currentMap));
@@ -520,6 +537,10 @@ void Game::renderGameObjects()
 	for (auto& currentWall : m_pWallVec)
 	{
 		currentWall->draw();
+	}
+	for (auto& currentHole : m_pHoleVec)
+	{
+		currentHole->draw();
 	}
 	m_pExplosion->draw();
 }

@@ -27,6 +27,7 @@
 #include "Enemy.h"
 #include "Wall.h"
 #include "Powerup.h"
+#include "Hole.h"
 
 const int FPS = 60;
 const int WINDOW_WIDTH = 1280;
@@ -92,6 +93,7 @@ public:
 	std::vector<Wall*>* getWallVector(); // Returns pointer to wall vector (of pointers to wall objects)
 	std::vector<Enemy*>* getEnemyVector(); // Returns pointer to enemy vector
 	std::vector<Powerup*>* getPowerupVector();
+	std::vector<Hole*>* getHoleVector();
 
 	// Mousebutton getter/setter
 	bool getMouseBtn(int i);
@@ -142,6 +144,9 @@ private:
 
 	// Vector of Powerup GameObjects
 	std::vector<Powerup*> m_pPowerupVec;
+
+	// Vector of Hole GameObjects
+	std::vector<Hole*> m_pHoleVec;
 	
 	const Uint8* m_iKeystates; // Keyboard state container.
 	

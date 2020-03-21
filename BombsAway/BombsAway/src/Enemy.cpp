@@ -8,6 +8,7 @@ Enemy::Enemy(glm::vec2 startPos)
 	setPreviousPosition(getPosition());
 
 	glm::vec2 size = TheTextureManager::Instance()->getTextureSize("enemy");
+	//glm::vec2 size = glm::vec2(64, 64);
 	setVelocity(glm::vec2(2, 2));
 	setWidth(size.x);
 	setHeight(size.y);

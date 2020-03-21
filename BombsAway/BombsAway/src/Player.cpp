@@ -108,28 +108,26 @@ void Player::update()
 			if (throwableBomb)
 			{
 				throwTimer++;
-				if (throwTimer >= throwTimerMax)
+				if (throwTimer == throwTimerMax)
 				{
 					if (TheGame::Instance()->getBombObject() != nullptr)
 					{
 						if (!TheGame::Instance()->getBombObject()->getBomb())
 						{
+							TheGame::Instance()->getBombObject()->setPosition(this->getPosition());
+							TheGame::Instance()->getBombObject()->setToss(true);
 							switch (playerFacing)
 							{
 							case NORTH:
-								TheGame::Instance()->getBombObject()->setPosition(glm::vec2(this->getPosition().x, this->getPosition().y - 192));
 								TheGame::Instance()->getBombObject()->setThrownFrom(NORTH);
 								break;
 							case SOUTH:
-								TheGame::Instance()->getBombObject()->setPosition(glm::vec2(this->getPosition().x, this->getPosition().y + 192));
 								TheGame::Instance()->getBombObject()->setThrownFrom(SOUTH);
 								break;
 							case WEST:
-								TheGame::Instance()->getBombObject()->setPosition(glm::vec2(this->getPosition().x - 192, this->getPosition().y));
 								TheGame::Instance()->getBombObject()->setThrownFrom(WEST);
 								break;
 							case EAST:
-								TheGame::Instance()->getBombObject()->setPosition(glm::vec2(this->getPosition().x + 192, this->getPosition().y));
 								TheGame::Instance()->getBombObject()->setThrownFrom(EAST);
 								break;
 							}
@@ -138,21 +136,12 @@ void Player::update()
 					}
 				}
 			}
-			
-			/*if (TheGame::Instance()->getBombObject() != nullptr)
-			{
-				if (!TheGame::Instance()->getBombObject()->getBomb())
-				{
-					TheGame::Instance()->getBombObject()->setPosition(this->getPosition());
-					TheGame::Instance()->getBombObject()->setBomb(true);
-				}
-			}*/
 		}
 		if (!TheGame::Instance()->checkForKeystroke(SDL_SCANCODE_SPACE) && spaceDown)
 		{
 			if (TheGame::Instance()->getBombObject() != nullptr)
 			{
-				if (!TheGame::Instance()->getBombObject()->getBomb())
+				if (!TheGame::Instance()->getBombObject()->getBomb() && throwTimer < throwTimerMax) // If no bomb set and bomb has not been thrown
 				{
 					TheGame::Instance()->getBombObject()->setPosition(this->getPosition());
 					TheGame::Instance()->getBombObject()->setBomb(true);
@@ -162,7 +151,7 @@ void Player::update()
 			throwTimer = 0;
 			spaceDown = false;
 		}
-
+		
 		// Check I-Frames
 		if (isInvul)
 		{

@@ -22,6 +22,7 @@ void Bomb::draw()
 	if (isSet)
 	{
 		TheTextureManager::Instance()->draw("bomb", getPosition().x, getPosition().y, TheGame::Instance()->getRenderer(), false);
+		//std::cout << "Bomb is set\n";
 	}
 }
 
@@ -29,6 +30,31 @@ void Bomb::update()
 {
     if (getBomb())
     {
+		if (getToss())
+		{
+			bombTossMove++;
+			switch (thrownFrom)
+			{
+			case NORTH:
+				setPosition(glm::vec2(getPosition().x, getPosition().y - 64));
+				break;
+			case SOUTH:
+				setPosition(glm::vec2(getPosition().x, getPosition().y + 64));
+				break;
+			case WEST:
+				setPosition(glm::vec2(getPosition().x - 64, getPosition().y));
+				break;
+			case EAST:
+				setPosition(glm::vec2(getPosition().x + 64, getPosition().y));
+				break;
+			}
+			if (bombTossMove >= bombTossMoveMax)
+			{
+				bombTossMove = 0;
+				setToss(false);
+			}
+		}
+    	
         if (bombTimer < bombTimerMax)
         {
             bombTimer++;
@@ -69,6 +95,16 @@ void Bomb::setExplode(bool expl)
 bool Bomb::getExplode()
 {
 	return hasExploded;
+}
+
+void Bomb::setToss(bool toss)
+{
+	beenTossed = toss;
+}
+
+bool Bomb::getToss()
+{
+	return beenTossed;
 }
 
 Direction Bomb::getThrownFrom()
