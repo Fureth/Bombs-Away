@@ -135,17 +135,22 @@ void TitleState::update()
 {
 	if (Game::Instance()->getMouseBtn(0))
 	{
-		if ((408 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 759) && (550 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 670))
+		if ((451 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 830) && (388 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 513))
 		{
 			// Start new game
 			Game::Instance()->setCurrentLevel(1);
 			Game::Instance()->GetFSM().changeState(new GameState());
 			Game::Instance()->createGameObjects();
 		}
-		else if ((416 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 755) && (720 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 835))
+		else if ((466 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 817) && (584 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 688))
 		{
 			// Controls page
 			Game::Instance()->GetFSM().changeState(new OptionsState());
+		}
+		else if ((531 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 752) && (751 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 850))
+		{
+			// Quit
+			Game::Instance()->exitGame();
 		}
 	}
 	if (Game::Instance()->checkForKeystroke(SDL_SCANCODE_SEMICOLON))

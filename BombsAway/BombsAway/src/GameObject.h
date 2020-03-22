@@ -52,7 +52,7 @@ public:
 	// Health variables
 	int currentHealth;
 	int invFrame = 0;
-	const int invFrameMax = 180;
+	int invFrameMax = 180;
 	bool isInvul = false;
 	
 private:

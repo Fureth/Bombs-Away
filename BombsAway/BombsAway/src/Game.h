@@ -109,6 +109,9 @@ public:
 	int getCurrentLevel();
 	void setCurrentLevel(int newLevel);
 
+	// To close game from outside of Game.cpp
+	void exitGame();
+
 private:
 	Game();
 	~Game();

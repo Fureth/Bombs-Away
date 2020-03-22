@@ -32,59 +32,79 @@ C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cp
 C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(9,15): warning C4244:         [
 C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(9,15): warning C4244:             T=float
 C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(9,15): warning C4244:         ]
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(207,14): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(207,14): warning C4244:         with
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(207,14): warning C4244:         [
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(207,14): warning C4244:             T=float
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(207,14): warning C4244:         ]
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(208,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(208,15): warning C4244:         with
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(208,15): warning C4244:         [
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(208,15): warning C4244:             T=float
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(208,15): warning C4244:         ]
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(209,13): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(209,13): warning C4244:         with
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(209,13): warning C4244:         [
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(209,13): warning C4244:             T=float
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(209,13): warning C4244:         ]
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(215,14): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(215,14): warning C4244:         with
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(215,14): warning C4244:         [
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(215,14): warning C4244:             T=float
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(215,14): warning C4244:         ]
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(216,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(216,15): warning C4244:         with
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(216,15): warning C4244:         [
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(216,15): warning C4244:             T=float
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(216,15): warning C4244:         ]
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(217,13): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(217,13): warning C4244:         with
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(217,13): warning C4244:         [
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(217,13): warning C4244:             T=float
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(217,13): warning C4244:         ]
   Enemy.cpp
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(210,16): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(210,16): warning C4244:         with
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(210,16): warning C4244:         [
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(210,16): warning C4244:             T=float
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(210,16): warning C4244:         ]
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(218,16): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(218,16): warning C4244:         with
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(218,16): warning C4244:         [
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(218,16): warning C4244:             T=float
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\CollisionManager.cpp(218,16): warning C4244:         ]
 C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.h(35,32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(13,15): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(13,15): warning C4244:         with
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(13,15): warning C4244:         [
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(13,15): warning C4244:             T=float
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(13,15): warning C4244:         ]
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(14,16): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(14,16): warning C4244:         with
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(14,16): warning C4244:         [
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(14,16): warning C4244:             T=float
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(14,16): warning C4244:         ]
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(32,83): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(32,83): warning C4244:         with
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(32,83): warning C4244:         [
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(32,83): warning C4244:             T=float
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(32,83): warning C4244:         ]
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(32,66): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(32,66): warning C4244:         with
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(32,66): warning C4244:         [
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(32,66): warning C4244:             T=float
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(32,66): warning C4244:         ]
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(35,83): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(35,83): warning C4244:         with
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(35,83): warning C4244:         [
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(35,83): warning C4244:             T=float
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(35,83): warning C4244:         ]
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(20,15): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(20,15): warning C4244:         with
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(20,15): warning C4244:         [
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(20,15): warning C4244:             T=float
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(20,15): warning C4244:         ]
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(21,16): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(21,16): warning C4244:         with
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(21,16): warning C4244:         [
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(21,16): warning C4244:             T=float
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(21,16): warning C4244:         ]
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(75,90): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(75,90): warning C4244:         with
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(75,90): warning C4244:         [
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(75,90): warning C4244:             T=float
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(75,90): warning C4244:         ]
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(75,73): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(75,73): warning C4244:         with
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(75,73): warning C4244:         [
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(75,73): warning C4244:             T=float
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(75,73): warning C4244:         ]
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(78,90): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(78,90): warning C4244:         with
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(78,90): warning C4244:         [
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(78,90): warning C4244:             T=float
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(78,90): warning C4244:         ]
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(78,73): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(78,73): warning C4244:         with
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(78,73): warning C4244:         [
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(78,73): warning C4244:             T=float
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(78,73): warning C4244:         ]
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(104,90): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(104,90): warning C4244:         with
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(104,90): warning C4244:         [
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(104,90): warning C4244:             T=float
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(104,90): warning C4244:         ]
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(104,73): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(104,73): warning C4244:         with
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(104,73): warning C4244:         [
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(104,73): warning C4244:             T=float
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(104,73): warning C4244:         ]
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(126,82): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(126,82): warning C4244:         with
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(126,82): warning C4244:         [
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(126,82): warning C4244:             T=float
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(126,82): warning C4244:         ]
   Explosion.cpp
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(35,66): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(35,66): warning C4244:         with
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(35,66): warning C4244:         [
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(35,66): warning C4244:             T=float
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(35,66): warning C4244:         ]
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(126,65): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(126,65): warning C4244:         with
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(126,65): warning C4244:         [
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(126,65): warning C4244:             T=float
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Enemy.cpp(126,65): warning C4244:         ]
 C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.h(35,32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Explosion.cpp(10,15): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
 C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Explosion.cpp(10,15): warning C4244:         with
@@ -200,18 +220,19 @@ C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Explosion.cpp(58,71
   Game.cpp
 C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.h(35,32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.h(35,32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(42,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(351,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(351,36): warning C4244:         with
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(351,36): warning C4244:         [
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(351,36): warning C4244:             T=float
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(351,36): warning C4244:         ]
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(47,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(356,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(356,36): warning C4244:         with
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(356,36): warning C4244:         [
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(356,36): warning C4244:             T=float
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(356,36): warning C4244:         ]
+  GameObject.cpp
   Hole.cpp
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(352,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(352,36): warning C4244:         with
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(352,36): warning C4244:         [
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(352,36): warning C4244:             T=float
-C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(352,36): warning C4244:         ]
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(357,36): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(357,36): warning C4244:         with
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(357,36): warning C4244:         [
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(357,36): warning C4244:             T=float
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.cpp(357,36): warning C4244:         ]
 C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.h(35,32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Hole.cpp(12,15): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
 C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Hole.cpp(12,15): warning C4244:         with

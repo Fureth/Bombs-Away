@@ -36,6 +36,11 @@ void Game::setCurrentLevel(int newLevel)
 	m_currentLevel = newLevel;
 }
 
+void Game::exitGame()
+{
+	m_bRunning = false;
+}
+
 Game::Game()
 {
 	m_iKeystates = SDL_GetKeyboardState(nullptr); // start reading keyboard states, returns pointer

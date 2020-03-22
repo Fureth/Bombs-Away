@@ -9,7 +9,7 @@
 
 class Enemy : public GameObject {
 public:
-	Enemy(glm::vec2 startPos);
+	Enemy(glm::vec2 startPos, int enemyType);
 	~Enemy();
 
 	// Draw the object
@@ -30,9 +30,11 @@ public:
 
 private:
 	Direction currentDirection;
-	
-	const int roamTimerMax = 10;
+	std::string textureSelect;
+	const int roamTimerMax = 39;
 	int roamTimer = 0;
+	int enemySpeed = 0;
+	int enemyType = 0;
 };
 
 #endif /* defined (__Enemy__) */

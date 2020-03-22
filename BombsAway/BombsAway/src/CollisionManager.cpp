@@ -181,8 +181,16 @@ bool CollisionManager::basicCollisionCheck(GameObject* object1, GameObject* obje
 				}
 				break;
             case ENEMY:
-				std::cout << "Enemy dies!" << std::endl;
-				object2->setIsActive(false);
+				if (!object2->isInvul)
+				{
+					object2->currentHealth -= 1;
+					object2->isInvul = true;
+				}
+				if (object2->currentHealth == 0)
+				{
+					std::cout << "Enemy dies!" << std::endl;
+					object2->setIsActive(false);
+				}
                 break;
 			default:
 				std::cout << "Explosion on unknown type!" << std::endl;
