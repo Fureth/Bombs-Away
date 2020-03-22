@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "TextureManager.h"
 #include "Direction.h"
+#include <glm/detail/type_vec2.hpp>
 
 class Enemy : public GameObject {
 public:
@@ -29,6 +30,9 @@ public:
 
 private:
 	Direction currentDirection;
+	
+	const int roamTimerMax = 10;
+	int roamTimer = 0;
 };
 
 #endif /* defined (__Enemy__) */

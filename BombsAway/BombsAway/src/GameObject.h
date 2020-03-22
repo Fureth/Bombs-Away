@@ -46,6 +46,10 @@ public:
 	bool getIsActive();
 	void setIsActive(bool active);
 
+    // Key functions
+    bool getHasKey();
+    void setHasKey(bool check);
+
 	// Health functions
 	virtual int getHealth();
 	virtual void changeHealth(bool lifeUp);
@@ -77,6 +81,7 @@ private:
 
 	// collision variables
 	bool m_isActive;
+    bool m_hasKey;
 	bool m_isColliding;
 	GameObjectType m_type;
 

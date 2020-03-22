@@ -190,6 +190,15 @@ bool CollisionManager::basicCollisionCheck(GameObject* object1, GameObject* obje
 			}
 		}
 	}
+
+	// Bomb based collisions
+	if (object1->getType() == BOMB)
+	{
+		if (!(obj1Top >= obj2Bottom || obj1Bottom <= obj2Top || obj1Left >= obj2Right || obj1Right <= obj2Left))
+		{
+			return true;
+		}
+	}
 	return false;
 }
 
@@ -226,15 +235,20 @@ bool CollisionManager::tileCollisionCheck(GameObject* object, int tileMap[12][20
 			int tileType = tileMap[j][i];
 			if (Game::Instance()->checkForKeystroke(SDL_SCANCODE_F))
 				std::cout << i << " " << j << std::endl;
-			if (tileType == 1 || tileType == 2 || tileType == 3 || tileType == 4 || tileType == 5) // 1 & 2 = Wall, 3 = Door
+			if (tileType == 1 || tileType == 2 || tileType == 3 || tileType == 4 || tileType == 5 || tileType == 10) // 1, 2, 4, 5 = Wall, 3 = Door, 10 = Hole
 			{
 				//std::cout << "Collision with Wall!" << std::endl;
 				if (object->getType() == ENEMY)
 				{
 					object->setPosition(object->getPreviousPosition());
 				}
+                //if (tileType == DOOR)
+                //{
+                //    Game::Instance()->GetFSM().pushState(new WinState());
+                //}
 				return true;
 			}
+			
 		}
 	}
 	return false;

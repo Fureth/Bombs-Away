@@ -6,5 +6,7 @@
 	TITLE,
 	OPTIONS,
 	LOSE,
+    WIN,
+	TEST,
 	NUM_OF_STATES
 };

@@ -30,6 +30,7 @@ void Map::DrawMap()
 	Wall* newWall;
 	Enemy* newEnemy;
 	Powerup* newPowerup;
+	Hole* newHole;
 
 
 	for (int row = 0; row < MAP_HEIGHT; row++)
@@ -92,6 +93,12 @@ void Map::DrawMap()
 				TheGame::Instance()->getPowerupVector()->push_back(newPowerup);
 				newPowerup = nullptr;
 				break;
+			case 7:
+				newPowerup = new Powerup(2);
+				newPowerup->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
+				TheGame::Instance()->getPowerupVector()->push_back(newPowerup);
+				newPowerup = nullptr;
+				break;
 			case 8: // Enemy A
 				newEnemy = new Enemy(glm::vec2(64 * column, 210 + (64 * row)));
 				TheGame::Instance()->getEnemyVector()->push_back(newEnemy);
@@ -99,6 +106,12 @@ void Map::DrawMap()
 				break;
 			case 9: // Player
 				TheGame::Instance()->getPlayerObject()->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
+				break;
+			case 10: // Holes
+				newHole = new Hole(column, row);
+				newHole->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
+				TheGame::Instance()->getHoleVector()->push_back(newHole);
+				newHole = nullptr;
 				break;
 			default:
 				break;

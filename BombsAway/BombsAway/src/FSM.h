@@ -74,6 +74,16 @@ public:
 	void exit();
 };
 
+class WinState : public State
+{
+public:
+    WinState();
+    void enter();
+    void update();
+    void render();
+    void exit();
+};
+
 class FSM
 {
 private:
@@ -88,6 +98,16 @@ public:
 	void popState(); // PauseState to GameState.
 	void clean();
 	vector<State*>& getStates();
+};
+
+class Dev : public State
+{
+public:
+	Dev();
+	void enter();
+	void update();
+	void render();
+	void exit();
 };
 
 #endif /* defined __FSM__ */

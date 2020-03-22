@@ -138,6 +138,7 @@ void TitleState::update()
 		if ((408 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 759) && (550 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 670))
 		{
 			// Start new game
+			Game::Instance()->setCurrentLevel(1);
 			Game::Instance()->GetFSM().changeState(new GameState());
 			Game::Instance()->createGameObjects();
 		}
@@ -146,6 +147,12 @@ void TitleState::update()
 			// Controls page
 			Game::Instance()->GetFSM().changeState(new OptionsState());
 		}
+	}
+	if (Game::Instance()->checkForKeystroke(SDL_SCANCODE_SEMICOLON))
+	{
+		Game::Instance()->setCurrentLevel(-1);
+		Game::Instance()->GetFSM().changeState(new Dev());
+		Game::Instance()->createGameObjects();
 	}
 }
 
@@ -235,6 +242,45 @@ void LoseState::exit()
 }
 // End Lose
 
+// Begin Win
+WinState::WinState()
+{
+    std::cout << "Rendering Winning screen..." << std::endl;
+    TheTextureManager::Instance()->load("../Assets/textures/winScreen.png", "win", TheGame::Instance()->getRenderer());
+    setType(WIN);
+}
+
+void WinState::enter()
+{
+    std::cout << "Entering Winning screen..." << std::endl;
+}
+
+void WinState::update()
+{
+    // Need adjustment
+    //if (Game::Instance()->getMouseBtn(0))
+    //{
+    //    if ((732 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 1126) && (664 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 768))
+    //    {
+    //        Game::Instance()->setMouseBtn(0, false);
+    //        Game::Instance()->GetFSM().popState();
+    //        Game::Instance()->GetFSM().changeState(new TitleState());
+    //        Game::Instance()->deleteGameObjects();
+    //    }
+    //}
+}
+
+void WinState::render()
+{
+    TheTextureManager::Instance()->draw("win", 140, 378, 1000, 400, TheGame::Instance()->getRenderer());
+}
+
+void WinState::exit()
+{
+    std::cout << "Moving to next level..." << std::endl;
+}
+//End Win
+
 // Begin FSM.
 FSM::FSM() {}
 FSM::~FSM() {}
@@ -302,4 +348,32 @@ vector<State*>& FSM::getStates()
 	return m_vStates;
 }
 
+
+
 // End FSM.
+
+// Begin Dev State
+
+Dev::Dev()
+{
+	setType(TEST);
+}
+
+void Dev::enter()
+{
+	std::cout << "Entering Dev Mode...\n";
+}
+
+void Dev::update()
+{
+}
+
+void Dev::render()
+{
+}
+
+void Dev::exit()
+{
+}
+
+// End Dev State

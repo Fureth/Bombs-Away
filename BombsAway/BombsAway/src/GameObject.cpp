@@ -119,3 +119,13 @@ void GameObject::changeHealth(bool lifeUp)
 		currentHealth--;
 	}
 }
+
+bool GameObject::getHasKey()
+{
+    return m_hasKey;
+}
+
+void GameObject::setHasKey(bool check)
+{
+    m_hasKey = check;
+}
