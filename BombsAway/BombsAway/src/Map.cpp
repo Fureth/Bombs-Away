@@ -30,6 +30,7 @@ void Map::DrawMap()
 	Wall* newWall;
 	Enemy* newEnemy;
 	Powerup* newPowerup;
+    Door* newDoor;
 	Hole* newHole;
 
 
@@ -57,12 +58,12 @@ void Map::DrawMap()
 				TheGame::Instance()->getWallVector()->push_back(newWall);
 				newWall = nullptr;
 				break;
-			case 3: // Door
-				newWall = new Wall(column, row, 0);
-				newWall->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
-				TheGame::Instance()->getWallVector()->push_back(newWall);
-				newWall = nullptr;
-				break;
+            case 3: // Door
+                newDoor = new Door(column, row, 0);
+                newDoor->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
+                TheGame::Instance()->getDoorVector()->push_back(newDoor);
+                newDoor = nullptr;
+                break;
 			case 4: // Wall with health
 				// Make wall
 				newWall = new Wall(column, row, 2);

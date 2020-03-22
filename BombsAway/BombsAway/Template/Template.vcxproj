@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\BombsAway\BombsAway\src\Door.cpp" />
     <ClCompile Include="..\src\Bomb.cpp" />
     <ClCompile Include="..\src\CollisionManager.cpp" />
+    <ClCompile Include="..\src\Door.cpp" />
     <ClCompile Include="..\src\Enemy.cpp" />
     <ClCompile Include="..\src\Explosion.cpp" />
     <ClCompile Include="..\src\FSM.cpp" />
@@ -38,9 +38,9 @@
     <ClCompile Include="..\src\Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\BombsAway\BombsAway\src\Door.h" />
     <ClInclude Include="..\src\Bomb.h" />
     <ClInclude Include="..\src\CollisionManager.h" />
+    <ClInclude Include="..\src\Door.h" />
     <ClInclude Include="..\src\Enemy.h" />
     <ClInclude Include="..\src\Explosion.h" />
     <ClInclude Include="..\src\FSM.h" />
