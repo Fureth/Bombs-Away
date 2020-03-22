@@ -26,6 +26,24 @@ bool Game::checkForKeystroke(SDL_Scancode c)
 	return false;
 }
 
+<<<<<<< HEAD
+=======
+int Game::getCurrentLevel()
+{
+	return m_currentLevel;
+}
+
+void Game::setCurrentLevel(int newLevel)
+{
+	m_currentLevel = newLevel;
+}
+
+void Game::exitGame()
+{
+	m_bRunning = false;
+}
+
+>>>>>>> dc3582c195962cae77a3339080af0a0c60d66708
 Game::Game()
 {
 	m_iKeystates = SDL_GetKeyboardState(nullptr); // start reading keyboard states, returns pointer

@@ -92,14 +92,44 @@ void Map::DrawMap()
 				TheGame::Instance()->getPowerupVector()->push_back(newPowerup);
 				newPowerup = nullptr;
 				break;
+<<<<<<< HEAD
 			case 8: // Enemy A
 				newEnemy = new Enemy(glm::vec2(64 * column, 210 + (64 * row)));
+=======
+			case 7:
+				newPowerup = new Powerup(2);
+				newPowerup->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
+				TheGame::Instance()->getPowerupVector()->push_back(newPowerup);
+				newPowerup = nullptr;
+				break;
+			case 8: // Snail
+				newEnemy = new Enemy(glm::vec2(64 * column, 210 + (64 * row)), 1);
+>>>>>>> dc3582c195962cae77a3339080af0a0c60d66708
 				TheGame::Instance()->getEnemyVector()->push_back(newEnemy);
 				newEnemy = nullptr;
 				break;
 			case 9: // Player
 				TheGame::Instance()->getPlayerObject()->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
 				break;
+<<<<<<< HEAD
+=======
+			case 10: // Holes
+				newHole = new Hole(column, row);
+				newHole->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
+				TheGame::Instance()->getHoleVector()->push_back(newHole);
+				newHole = nullptr;
+				break;
+			case 11: // Ghost Samurai
+				newEnemy = new Enemy(glm::vec2(64 * column, 210 + (64 * row)), 2);
+				TheGame::Instance()->getEnemyVector()->push_back(newEnemy);
+				newEnemy = nullptr;
+				break;
+			case 12: // Boss
+				newEnemy = new Enemy(glm::vec2(64 * column, 210 + (64 * row)), 3);
+				TheGame::Instance()->getEnemyVector()->push_back(newEnemy);
+				newEnemy = nullptr;
+				break;
+>>>>>>> dc3582c195962cae77a3339080af0a0c60d66708
 			default:
 				break;
 

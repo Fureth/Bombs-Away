@@ -101,6 +101,16 @@ public:
 	int timerCount = 0;
 	const int timerCountMax = 60;
 
+<<<<<<< HEAD
+=======
+	// Level Select Getter/Setter
+	int getCurrentLevel();
+	void setCurrentLevel(int newLevel);
+
+	// To close game from outside of Game.cpp
+	void exitGame();
+
+>>>>>>> dc3582c195962cae77a3339080af0a0c60d66708
 private:
 	Game();
 	~Game();
