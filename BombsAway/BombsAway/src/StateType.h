@@ -6,6 +6,5 @@
 	TITLE,
 	OPTIONS,
 	LOSE,
-	TEST,
 	NUM_OF_STATES
 };

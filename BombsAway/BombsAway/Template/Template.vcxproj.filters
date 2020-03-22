@@ -66,9 +66,6 @@
     <ClCompile Include="..\src\Powerup.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Hole.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Game.h">
@@ -118,9 +115,6 @@
     </ClInclude>
     <ClInclude Include="..\src\GameObjectType.h">
       <Filter>Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Hole.h">
-      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

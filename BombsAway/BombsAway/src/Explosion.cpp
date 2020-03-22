@@ -29,9 +29,6 @@ void Explosion::draw()
 			break;
 		case 1:
 			TheTextureManager::Instance()->drawFrame("explosion", getPosition().x, getPosition().y, 128, 128, 1, 1, TheGame::Instance()->getRenderer());
-			//Bomb sound effect
-			TheSoundManager::Instance()->load("../Assets/audios/8bit_bomb_explosion.wav", "explosion", sound_type::SOUND_SFX);
-			TheSoundManager::Instance()->playSound("explosion", 0);
 			break;
 		case 2:
 			TheTextureManager::Instance()->drawFrame("explosion", getPosition().x, getPosition().y, 128, 128, 1, 2, TheGame::Instance()->getRenderer());
