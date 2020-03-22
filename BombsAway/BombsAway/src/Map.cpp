@@ -30,6 +30,7 @@ void Map::DrawMap()
 	Wall* newWall;
 	Enemy* newEnemy;
 	Powerup* newPowerup;
+	Hole* newHole;
 
 
 	for (int row = 0; row < MAP_HEIGHT; row++)
@@ -93,6 +94,15 @@ void Map::DrawMap()
 				newPowerup = nullptr;
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+			case 7:
+				newPowerup = new Powerup(2);
+				newPowerup->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
+				TheGame::Instance()->getPowerupVector()->push_back(newPowerup);
+				newPowerup = nullptr;
+				break;
+>>>>>>> origin/master
 			case 8: // Enemy A
 				newEnemy = new Enemy(glm::vec2(64 * column, 210 + (64 * row)));
 =======
@@ -112,13 +122,17 @@ void Map::DrawMap()
 				TheGame::Instance()->getPlayerObject()->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
 				break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/master
 			case 10: // Holes
 				newHole = new Hole(column, row);
 				newHole->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
 				TheGame::Instance()->getHoleVector()->push_back(newHole);
 				newHole = nullptr;
 				break;
+<<<<<<< HEAD
 			case 11: // Ghost Samurai
 				newEnemy = new Enemy(glm::vec2(64 * column, 210 + (64 * row)), 2);
 				TheGame::Instance()->getEnemyVector()->push_back(newEnemy);
@@ -130,6 +144,8 @@ void Map::DrawMap()
 				newEnemy = nullptr;
 				break;
 >>>>>>> dc3582c195962cae77a3339080af0a0c60d66708
+=======
+>>>>>>> origin/master
 			default:
 				break;
 
