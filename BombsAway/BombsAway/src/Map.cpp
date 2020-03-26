@@ -102,7 +102,11 @@ void Map::DrawMap()
 				TheGame::Instance()->getPowerupVector()->push_back(newPowerup);
 				newPowerup = nullptr;
 				break;
+<<<<<<< HEAD
 >>>>>>> origin/master
+=======
+>>>>>>> b839997980093adeb310aba82ba329fc2aa93d91
+>>>>>>> master
 			case 8: // Enemy A
 				newEnemy = new Enemy(glm::vec2(64 * column, 210 + (64 * row)));
 =======
@@ -125,7 +129,11 @@ void Map::DrawMap()
 <<<<<<< HEAD
 =======
 =======
+<<<<<<< HEAD
 >>>>>>> origin/master
+=======
+>>>>>>> b839997980093adeb310aba82ba329fc2aa93d91
+>>>>>>> master
 			case 10: // Holes
 				newHole = new Hole(column, row);
 				newHole->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
@@ -145,7 +153,11 @@ void Map::DrawMap()
 				break;
 >>>>>>> dc3582c195962cae77a3339080af0a0c60d66708
 =======
+<<<<<<< HEAD
 >>>>>>> origin/master
+=======
+>>>>>>> b839997980093adeb310aba82ba329fc2aa93d91
+>>>>>>> master
 			default:
 				break;
 

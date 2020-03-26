@@ -109,7 +109,11 @@ public:
 <<<<<<< HEAD
 =======
 =======
+<<<<<<< HEAD
 >>>>>>> origin/master
+=======
+>>>>>>> b839997980093adeb310aba82ba329fc2aa93d91
+>>>>>>> master
 	// Level Select Getter/Setter
 	int getCurrentLevel();
 	void setCurrentLevel(int newLevel);
@@ -120,7 +124,11 @@ public:
 
 >>>>>>> dc3582c195962cae77a3339080af0a0c60d66708
 =======
+<<<<<<< HEAD
 >>>>>>> origin/master
+=======
+>>>>>>> b839997980093adeb310aba82ba329fc2aa93d91
+>>>>>>> master
 private:
 	Game();
 	~Game();
