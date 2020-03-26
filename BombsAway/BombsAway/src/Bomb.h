@@ -4,6 +4,7 @@
 
 #include "GameObject.h"
 #include "TextureManager.h"
+#include "Direction.h"
 
 class Bomb : public GameObject {
 public:
@@ -26,11 +27,25 @@ public:
 	void setExplode(bool expl);
 	bool getExplode();
 
+	void setToss(bool toss);
+	bool getToss();
+
+	Direction getThrownFrom();
+	void setThrownFrom(Direction thrown);
+
+	int bombTimer = 0;
+	int bombTossMove = 0;
+
 private:
     bool isSet = false;
 	bool hasExploded = false;
-    int bombTimer = 0;
+	bool beenTossed = false;
+    
     const int bombTimerMax = 180;
+	
+	const int bombTossMoveMax = 3;
+
+	Direction thrownFrom = NORTH;
 };
 
 
