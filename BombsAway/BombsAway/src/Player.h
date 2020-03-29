@@ -32,6 +32,10 @@ public:
 	// Health functions
 	int getHealth();
 	void changeHealth(bool lifeUp);
+
+	// Key functions
+	void setKey(bool key);
+	bool getKey();
 	
 private:
 	//Timer variables for walking animations
@@ -46,7 +50,8 @@ private:
 
     bool requestBomb = false; // This may be unneeded due to refactoring of Game.cpp
 	bool throwableBomb = false;
-
+	bool keyObtained = false;
+	
 	Direction playerFacing = SOUTH;
 };
 

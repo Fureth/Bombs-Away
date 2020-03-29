@@ -5,11 +5,10 @@
 #include "GameObject.h"
 #include "TextureManager.h"
 #include "Direction.h"
-#include <glm/detail/type_vec2.hpp>
 
 class Enemy : public GameObject {
 public:
-	Enemy(glm::vec2 startPos);
+	Enemy(glm::vec2 startPos, int enemyType);
 	~Enemy();
 
 	// Draw the object
@@ -30,9 +29,14 @@ public:
 
 private:
 	Direction currentDirection;
-	
-	const int roamTimerMax = 10;
-	int roamTimer = 0;
+	int frameTimer = 0;
+	const int frameTimerMid = 19;
+	const int frameTimerMax = 39;
+	int enemyType = 0;
+	int enemySpeed = 0;
+
+	/*int rowSelector;
+	int frameSelector;*/
 };
 
 #endif /* defined (__Enemy__) */

@@ -8,7 +8,7 @@
 class Door : public GameObject {
 public:
     Door();
-    Door(int xPos, int yPos, int wallType);
+    Door(int xPos, int yPos, int wallType, int unlockType);
     ~Door();
 
     // Draw the object
@@ -25,10 +25,13 @@ public:
 
     //int getX();
     //int getY();
+    int xPos, yPos;
+	int doorType;
+	bool unlocked = false;
 
 private:
     bool isDestroyed = false;
-    int xPos, yPos;
+    
 
 };
 

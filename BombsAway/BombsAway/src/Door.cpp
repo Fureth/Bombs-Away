@@ -13,7 +13,11 @@ Door::Door()
 }
 
 // Health indicates wall types: 0 = door, 1 = unbreakable, 2 = breakable
-Door::Door(int xPos, int yPos, int wallType)
+// 3 Unlock types:
+// 1 = unlock key, proceed next level
+// 2 = unlock key, switch level layout (must stay unlocked)
+// 3 = unlock enemy death, proceed next level
+Door::Door(int xPos, int yPos, int wallType, int unlockType)
 {
     TheTextureManager::Instance()->load("../Assets/textures/wallsanddoor.png", "wallsanddoor", TheGame::Instance()->getRenderer());
 
@@ -25,6 +29,7 @@ Door::Door(int xPos, int yPos, int wallType)
     setWidth(size.x);
     setHeight(size.y);
     setIsColliding(false);
+	doorType = unlockType;
     setType(GameObjectType::DOOR);
 }
 
@@ -42,11 +47,21 @@ void Door::draw()
 
 void Door::update()
 {
-    //if (getIsColliding())
-    //{
-    //    setIsColliding(false);
-    //    setDestruction(true);
-    //}
+	switch (doorType)
+	{
+	case 1:
+		if (Game::Instance()->getPlayerObject()->getKey())
+		{
+			Game::Instance()->GetFSM().pushState(new WinState);
+		}
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	default:
+		break;
+	}
 }
 
 void Door::clean()

@@ -226,3 +226,13 @@ void Player::changeHealth(bool lifeUp)
 	}
 }
 
+void Player::setKey(bool key)
+{
+	keyObtained = key;
+}
+
+bool Player::getKey()
+{
+	return keyObtained;
+}
+
