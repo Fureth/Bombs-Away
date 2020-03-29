@@ -192,6 +192,11 @@ std::vector<Powerup*>* Game::getPowerupVector()
 	return &m_pPowerupVec;
 }
 
+std::vector<Door*>* Game::getDoorVector()
+{
+    return &m_pDoorVec;
+}
+
 std::vector<Hole*>* Game::getHoleVector()
 {
 	return &m_pHoleVec;
@@ -567,5 +572,9 @@ void Game::renderGameObjects()
 	{
 		currentHole->draw();
 	}
+    for (auto& currentDoor : m_pDoorVec)
+    {
+        currentDoor->draw();
+    }
 	m_pExplosion->draw();
 }

@@ -69,7 +69,7 @@
     <ClCompile Include="..\src\Hole.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\BombsAway\BombsAway\src\Door.cpp">
+    <ClCompile Include="..\src\Door.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -125,7 +125,7 @@
     <ClInclude Include="..\src\Hole.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\BombsAway\BombsAway\src\Door.h">
+    <ClInclude Include="..\src\Door.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
