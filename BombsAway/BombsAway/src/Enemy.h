@@ -27,6 +27,8 @@ public:
 	void changeDirection();
 	Direction getDirection();
 
+	bool keyEnemy = false;
+
 private:
 	Direction currentDirection;
 	int frameTimer = 0;

@@ -228,11 +228,43 @@ void Player::changeHealth(bool lifeUp)
 
 void Player::setKey(bool key)
 {
-	keyObtained = key;
+	if (!getKey())
+	{
+		keyObtained = key;
+	}
+	else
+	{
+		secondKey = key;
+	}
 }
 
 bool Player::getKey()
 {
 	return keyObtained;
+}
+
+bool Player::getKeyTwo()
+{
+	return secondKey;
+}
+
+void Player::setSpawn(bool spawned)
+{
+	beenSpawned = spawned;
+}
+
+bool Player::getSpawn()
+{
+	return beenSpawned;
+}
+
+void Player::setKeyEnemy(bool kill)
+{
+	keyEnemyKilled = kill;
+}
+
+bool Player::getKeyEnemy()
+{
+	return keyEnemyKilled;
 }
 

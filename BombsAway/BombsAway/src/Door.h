@@ -28,9 +28,10 @@ public:
     int xPos, yPos;
 	int doorType;
 	bool unlocked = false;
+	bool isDestroyed = false;
 
 private:
-    bool isDestroyed = false;
+    
     
 
 };

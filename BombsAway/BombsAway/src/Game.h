@@ -116,8 +116,10 @@ public:
 
 	void setActiveMap(int map);
 	Map* getActiveMap();
+	int getMapInt();
 
 	void setDoorCheck(int xCheck, int yCheck);
+	void clearVectors();
 
 private:
 	Game();

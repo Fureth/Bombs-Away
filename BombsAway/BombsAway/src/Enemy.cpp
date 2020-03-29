@@ -36,6 +36,11 @@ Enemy::Enemy(glm::vec2 startPos, int enemyType)
 		currentHealth = 2;
 		enemySpeed = 2;
 		break;
+	case 4: // Key Snail
+		currentHealth = 1;
+		enemySpeed = 1;
+		keyEnemy = true;
+		break;
 	default:
 		break;
 	}
@@ -137,8 +142,52 @@ void Enemy::draw()
 		}
 		TheTextureManager::Instance()->drawFrame("boss", getPosition().x, getPosition().y, 64, 64, rowSelector, frameSelector, TheGame::Instance()->getRenderer());
 		break;
+	case 4: // Key Snail
+		switch (getDirection())
+		{
+		case NORTH: // Up
+			if (frameTimer > frameTimerMid)
+			{
+				TheTextureManager::Instance()->drawFrame("enemyUp", getPosition().x, getPosition().y, 64, 64, 1, 0, TheGame::Instance()->getRenderer());
+			}
+			else
+			{
+				TheTextureManager::Instance()->drawFrame("enemyUp", getPosition().x, getPosition().y, 64, 64, 2, 0, TheGame::Instance()->getRenderer());
+			}
+			break;
+		case SOUTH: // Down
+			if (frameTimer > frameTimerMid)
+			{
+				TheTextureManager::Instance()->drawFrame("enemyDn", getPosition().x, getPosition().y, 64, 64, 1, 0, TheGame::Instance()->getRenderer());
+			}
+			else
+			{
+				TheTextureManager::Instance()->drawFrame("enemyDn", getPosition().x, getPosition().y, 64, 64, 2, 0, TheGame::Instance()->getRenderer());
+			}
+			break;
+		case EAST: // Right
+			if (frameTimer > frameTimerMid)
+			{
+				TheTextureManager::Instance()->drawFrame("enemyRt", getPosition().x, getPosition().y, 64, 64, 1, 0, TheGame::Instance()->getRenderer());
+			}
+			else
+			{
+				TheTextureManager::Instance()->drawFrame("enemyRt", getPosition().x, getPosition().y, 64, 64, 2, 0, TheGame::Instance()->getRenderer());
+			}
+			break;
+		case WEST: // Left
+			if (frameTimer > frameTimerMid)
+			{
+				TheTextureManager::Instance()->drawFrame("enemyLt", getPosition().x, getPosition().y, 64, 64, 1, 0, TheGame::Instance()->getRenderer());
+			}
+			else
+			{
+				TheTextureManager::Instance()->drawFrame("enemyLt", getPosition().x, getPosition().y, 64, 64, 2, 0, TheGame::Instance()->getRenderer());
+			}
+			break;
+		}
+		break;
 	}
-	
 
 }
 

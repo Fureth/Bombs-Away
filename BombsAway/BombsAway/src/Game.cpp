@@ -44,6 +44,8 @@ void Game::exitGame()
 void Game::setActiveMap(int map)
 {
 	activeMap = map;
+	//clearVectors(); // Clear map-specific vectors
+	//getActiveMap()->DrawMap(); // Re-populate map-specific vectors
 }
 
 Map* Game::getActiveMap()
@@ -55,15 +57,21 @@ Map* Game::getActiveMap()
 		{
 			return m_pGameMapA;
 		}
+		return nullptr;
 	case 2:
 		if (m_pGameMapB != nullptr)
 		{
 			return m_pGameMapB;
 		}
+		return nullptr;
 	default:
 		return nullptr;
-		break;
 	}
+}
+
+int Game::getMapInt()
+{
+	return activeMap;
 }
 
 void Game::setDoorCheck(int xCheck, int yCheck)
@@ -73,7 +81,52 @@ void Game::setDoorCheck(int xCheck, int yCheck)
 		if (door->xPos == xCheck && door->yPos == yCheck)
 		{
 			door->update();
+			break;
 		}
+	}
+}
+
+void Game::clearVectors()
+{
+	if (!m_pWallVec.empty())
+	{
+		for (auto& currentWall : m_pWallVec)
+		{
+			currentWall = nullptr;
+		}
+		m_pWallVec.erase(remove(m_pWallVec.begin(), m_pWallVec.end(), nullptr), m_pWallVec.end());
+	}
+	if (!m_pEnemyVec.empty())
+	{
+		for (auto& currentEnemy : m_pEnemyVec)
+		{
+			currentEnemy = nullptr;
+		}
+		m_pEnemyVec.erase(remove(m_pEnemyVec.begin(), m_pEnemyVec.end(), nullptr), m_pEnemyVec.end());
+	}
+	if (!m_pPowerupVec.empty())
+	{
+		for (auto& currentPowerup : m_pPowerupVec)
+		{
+			currentPowerup = nullptr;
+		}
+		m_pPowerupVec.erase(remove(m_pPowerupVec.begin(), m_pPowerupVec.end(), nullptr), m_pPowerupVec.end());
+	}
+	if (!m_pDoorVec.empty())
+	{
+		for (auto& currentDoor : m_pDoorVec)
+		{
+			currentDoor = nullptr;
+		}
+		m_pDoorVec.erase(remove(m_pDoorVec.begin(), m_pDoorVec.end(), nullptr), m_pDoorVec.end());
+	}
+	if (!m_pHoleVec.empty())
+	{
+		for (auto& currentHole : m_pHoleVec)
+		{
+			currentHole = nullptr;
+		}
+		m_pHoleVec.erase(remove(m_pHoleVec.begin(), m_pHoleVec.end(), nullptr), m_pHoleVec.end());
 	}
 }
 
@@ -91,24 +144,25 @@ void Game::createGameObjects()
 {
 	if (!m_bObjectsCreated)
 	{
-		// Create most objects
+		// Create most objects. These are static between screen transition
 		m_pPlayer = new Player();
 		m_pBomb = new Bomb();
 		m_pExplosion = new Explosion();
 		m_pGameMapA = new Map();
 		m_pGameMapB = new Map();
 
+		setActiveMap(1);
 		// Select which map to load and "draw" it
 		switch (getCurrentLevel())
 		{
 		case 1:
 			m_pGameMapA->LoadMap(firstLevel);
-			setTimer(99);
+			setTimer(90);
 			break;
 		case 2:
             m_pGameMapA->LoadMap(secondLevelA);
             m_pGameMapB->LoadMap(secondLevelB);
-            setTimer(99);
+            setTimer(200);
 			break;
 		case 3:
 			break;
@@ -122,10 +176,6 @@ void Game::createGameObjects()
 			break;
 		}
 		m_pGameMapA->DrawMap();
-		if (m_pGameMapB != nullptr)
-		{
-			m_pGameMapB->DrawMap();
-		}
 
 		timerCount = 0;
 
@@ -147,30 +197,7 @@ void Game::deleteGameObjects()
 		m_pExplosion = nullptr;
 		m_pGameMapA = nullptr;
 
-		if (!m_pWallVec.empty())
-		{
-			for (auto& currentWall : m_pWallVec)
-			{
-				currentWall = nullptr;
-			}
-			m_pWallVec.erase(remove(m_pWallVec.begin(), m_pWallVec.end(), nullptr), m_pWallVec.end());
-		}
-		if (!m_pEnemyVec.empty())
-		{
-			for (auto& currentEnemy : m_pEnemyVec)
-			{
-				currentEnemy = nullptr;
-			}
-			m_pEnemyVec.erase(remove(m_pEnemyVec.begin(), m_pEnemyVec.end(), nullptr), m_pEnemyVec.end());
-		}
-		if (!m_pPowerupVec.empty())
-		{
-			for (auto& currentPowerup : m_pPowerupVec)
-			{
-				currentPowerup = nullptr;
-			}
-			m_pPowerupVec.erase(remove(m_pPowerupVec.begin(), m_pPowerupVec.end(), nullptr), m_pPowerupVec.end());
-		}
+		clearVectors();
 
 		m_bObjectsCreated = false;
 	}
@@ -457,7 +484,7 @@ void Game::updateGameObjects()
 			currentWall->update();
 			if (currentWall->getDestruction())
 			{
-				m_pGameMapA->currentMap[currentWall->getY()][currentWall->getX()] = 0;
+				getActiveMap()->currentMap[currentWall->getY()][currentWall->getX()] = 0;
 				delete currentWall;
 				currentWall = nullptr;
 			}
@@ -472,13 +499,18 @@ void Game::updateGameObjects()
 			Collision::basicCollisionCheck(m_pExplosion, currentEnemy);
 			if (!currentEnemy->getIsActive())
 			{
+				if (currentEnemy->keyEnemy)
+				{
+					m_pPlayer->setKeyEnemy(true);
+					cout << "Key enemy killed!\n";
+				}
 				delete currentEnemy;
 				currentEnemy = nullptr;
 			}
 
 		}
 	}
-
+	
 	m_pExplosion->update();
 
 	// Remove any destroyed walls from vector
@@ -495,7 +527,7 @@ void Game::updateGameObjects()
 
 	for (auto& currentEnemy : m_pEnemyVec)
 	{
-		currentEnemy->setIsColliding(Collision::tileCollisionCheck(currentEnemy, m_pGameMapA->currentMap));
+		currentEnemy->setIsColliding(Collision::tileCollisionCheck(currentEnemy, getActiveMap()->currentMap));
 		currentEnemy->update();
 		// Enemy & Player collisions
 		Collision::basicCollisionCheck(m_pPlayer, currentEnemy);
@@ -503,7 +535,7 @@ void Game::updateGameObjects()
 
 	for (auto& currentPowerup : m_pPowerupVec)
 	{
-		if (Collision::basicCollisionCheck(m_pPlayer, currentPowerup) && !Collision::tileCollisionCheck(m_pPlayer, m_pGameMapA->currentMap))
+		if (Collision::basicCollisionCheck(m_pPlayer, currentPowerup) && !Collision::tileCollisionCheck(m_pPlayer, getActiveMap()->currentMap))
 		{
 			currentPowerup->setCollected();
 		}
@@ -558,10 +590,28 @@ void Game::updateGameObjects()
 
 	
 	// Player vs Wall collision checker (map based) -- Might be able to change this a bit
-	m_pPlayer->setIsColliding(Collision::tileCollisionCheck(m_pPlayer, m_pGameMapA->currentMap));
+	m_pPlayer->setIsColliding(Collision::tileCollisionCheck(m_pPlayer, getActiveMap()->currentMap));
 	if (m_pPlayer->getIsColliding())
 	{
-		m_pPlayer->setIsColliding(Collision::playerCollisionMovement(m_pPlayer, m_pGameMapA->currentMap));
+		m_pPlayer->setIsColliding(Collision::playerCollisionMovement(m_pPlayer, getActiveMap()->currentMap));
+	}
+
+	// Door removal check
+	for (auto& currentDoor : m_pDoorVec)
+	{
+		if (currentDoor->isDestroyed)
+		{
+			getActiveMap()->currentMap[currentDoor->yPos][currentDoor->xPos] = 0;
+			delete currentDoor;
+			currentDoor = nullptr;
+		}
+	}
+
+	// Remove cleared door from vector
+	if (!m_pDoorVec.empty())
+	{
+		m_pDoorVec.erase(remove(m_pDoorVec.begin(), m_pDoorVec.end(), nullptr), m_pDoorVec.end());
+
 	}
 
 	// Decrement game timer

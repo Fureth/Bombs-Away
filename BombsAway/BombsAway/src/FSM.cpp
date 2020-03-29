@@ -272,7 +272,7 @@ void WinState::update()
             Game::Instance()->GetFSM().popState(); // Remove winstate
 			Game::Instance()->deleteGameObjects(); // Delete the current gameobjects/map
 			Game::Instance()->setCurrentLevel(Game::Instance()->getCurrentLevel() + 1);
-			if (Game::Instance()->getCurrentLevel() == 0) // If attempting to go to new level from test
+			if (Game::Instance()->getCurrentLevel() == 0 || Game::Instance()->getCurrentLevel() > 2) // If attempting to go to new level from test
         	{
 				Game::Instance()->GetFSM().changeState(new TitleState()); // Change to title
         	}

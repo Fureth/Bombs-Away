@@ -243,14 +243,16 @@ bool CollisionManager::tileCollisionCheck(GameObject* object, int tileMap[12][20
 			int tileType = tileMap[j][i];
 			if (Game::Instance()->checkForKeystroke(SDL_SCANCODE_F))
 				std::cout << i << " " << j << std::endl;
-			if (tileType == 1 || tileType == 2 || tileType == 3 || tileType == 4 || tileType == 10) // 1, 2, 4 = Wall, 3 = Door, 10 = Hole
+			if (tileType == 1 || tileType == 2 || tileType == 3 || tileType == 4 || tileType == 10 || tileType == 14 || 
+				tileType == 15 || tileType == 16 || tileType == 17) // 1, 2, 4 = Wall, 3, 14, 15, 16, 17 = Door, 10 = Hole
 			{
 				//std::cout << "Collision with Wall!" << std::endl;
 				if (object->getType() == ENEMY)
 				{
 					object->setPosition(object->getPreviousPosition());
 				}
-                if (object->getType() == PLAYER && tileType == 3)
+                if (object->getType() == PLAYER && (tileType == 3 || tileType == 14 ||
+					tileType == 15 || tileType == 16 || tileType == 17))
                 {
 					Game::Instance()->setDoorCheck(i, j);
                 }
