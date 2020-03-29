@@ -270,7 +270,7 @@ C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Hole.cpp(24,82): wa
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Hole.cpp(24,82): warning C4244:         [
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Hole.cpp(24,82): warning C4244:             T=float
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Hole.cpp(24,82): warning C4244:         ]
-  main.cpp
+  Map.cpp
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Hole.cpp(24,65): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Hole.cpp(24,65): warning C4244:         with
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Hole.cpp(24,65): warning C4244:         [
@@ -334,14 +334,12 @@ C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Player.cpp(46,86): 
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Player.cpp(46,86): warning C4244:         [
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Player.cpp(46,86): warning C4244:             T=float
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Player.cpp(46,86): warning C4244:         ]
-  Map.cpp
+  Powerup.cpp
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Player.cpp(46,69): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Player.cpp(46,69): warning C4244:         with
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Player.cpp(46,69): warning C4244:         [
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Player.cpp(46,69): warning C4244:             T=float
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Player.cpp(46,69): warning C4244:         ]
-  Powerup.cpp
-C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Game.h(36,32): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Game.h(36,32): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Powerup.cpp(11,15): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Powerup.cpp(11,15): warning C4244:         with
@@ -403,10 +401,12 @@ C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Wall.cpp(39,90): wa
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Wall.cpp(39,90): warning C4244:         [
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Wall.cpp(39,90): warning C4244:             T=float
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Wall.cpp(39,90): warning C4244:         ]
-  Generating Code...
+  main.cpp
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Wall.cpp(39,73): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Wall.cpp(39,73): warning C4244:         with
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Wall.cpp(39,73): warning C4244:         [
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Wall.cpp(39,73): warning C4244:             T=float
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Wall.cpp(39,73): warning C4244:         ]
+  Generating Code...
+C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Game.h(36,32): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
   Template.vcxproj -> C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\bin\Debug\Template.exe

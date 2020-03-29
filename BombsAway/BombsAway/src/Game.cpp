@@ -60,7 +60,7 @@ void Game::createGameObjects()
 		switch (getCurrentLevel())
 		{
 		case 1:
-			m_pGameMap->LoadMap(firstLevel);
+			m_pGameMap->LoadMap(thirdLevel);
 			setTimer(99);
 			break;
 		case 2:
