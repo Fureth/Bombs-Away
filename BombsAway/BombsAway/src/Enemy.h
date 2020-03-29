@@ -28,13 +28,16 @@ public:
 	Direction getDirection();
 
 	bool keyEnemy = false;
+	int enemyType = 0;
 
 private:
 	Direction currentDirection;
 	int frameTimer = 0;
 	const int frameTimerMid = 19;
 	const int frameTimerMax = 39;
-	int enemyType = 0;
+	const int invFrameMax = 90;
+	int invFrame = 0;
+	
 	int enemySpeed = 0;
 
 	/*int rowSelector;

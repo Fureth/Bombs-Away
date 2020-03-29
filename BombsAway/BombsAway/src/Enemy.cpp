@@ -35,6 +35,7 @@ Enemy::Enemy(glm::vec2 startPos, int enemyType)
 	case 3: // Boss
 		currentHealth = 2;
 		enemySpeed = 2;
+		keyEnemy = true;
 		break;
 	case 4: // Key Snail
 		currentHealth = 1;
@@ -125,22 +126,25 @@ void Enemy::draw()
 		break;
 	case 3: // Boss
 		frameSelector = frameTimer / 10;
-		switch (getDirection())
+		if (!isInvul || invFrame % 10 > 5)
 		{
-		case NORTH: // Up
-			rowSelector = 1;
-			break;
-		case SOUTH: // Down
-			rowSelector = 2;
-			break;
-		case EAST: // Right
-			rowSelector = 4;
-			break;
-		case WEST: // Left
-			rowSelector = 3;
-			break;
+			switch (getDirection())
+			{
+			case NORTH: // Up
+				rowSelector = 1;
+				break;
+			case SOUTH: // Down
+				rowSelector = 2;
+				break;
+			case EAST: // Right
+				rowSelector = 4;
+				break;
+			case WEST: // Left
+				rowSelector = 3;
+				break;
+			}
+			TheTextureManager::Instance()->drawFrame("boss", getPosition().x, getPosition().y, 64, 64, rowSelector, frameSelector, TheGame::Instance()->getRenderer());
 		}
-		TheTextureManager::Instance()->drawFrame("boss", getPosition().x, getPosition().y, 64, 64, rowSelector, frameSelector, TheGame::Instance()->getRenderer());
 		break;
 	case 4: // Key Snail
 		switch (getDirection())
@@ -206,6 +210,21 @@ void Enemy::update()
 			changeDirection();
 			setIsColliding(false);
 		}
+
+		// Check I-Frames
+		if (isInvul)
+		{
+			if (invFrame < invFrameMax)
+			{
+				invFrame++;
+			}
+			else if (invFrame >= invFrameMax)
+			{
+				isInvul = false;
+				invFrame = 0;
+			}
+		}
+		
 		wander();
 	}
 

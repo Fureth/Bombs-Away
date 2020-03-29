@@ -139,7 +139,7 @@ void TitleState::update()
 		if ((451 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 830) && (388 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 513))
 		{
 			// Start new game
-			Game::Instance()->setCurrentLevel(1);
+			Game::Instance()->setCurrentLevel(0);
 			Game::Instance()->GetFSM().changeState(new GameState());
 			Game::Instance()->createGameObjects();
 		}
@@ -156,7 +156,7 @@ void TitleState::update()
 	}
 	if (Game::Instance()->checkForKeystroke(SDL_SCANCODE_SEMICOLON))
 	{
-		Game::Instance()->setCurrentLevel(-1);
+		Game::Instance()->setCurrentLevel(-2);
 		Game::Instance()->GetFSM().changeState(new Dev());
 		Game::Instance()->createGameObjects();
 	}
@@ -272,7 +272,7 @@ void WinState::update()
             Game::Instance()->GetFSM().popState(); // Remove winstate
 			Game::Instance()->deleteGameObjects(); // Delete the current gameobjects/map
 			Game::Instance()->setCurrentLevel(Game::Instance()->getCurrentLevel() + 1);
-			if (Game::Instance()->getCurrentLevel() == 0 || Game::Instance()->getCurrentLevel() > 2) // If attempting to go to new level from test
+			if (Game::Instance()->getCurrentLevel() == -1 || Game::Instance()->getCurrentLevel() > 3) // If attempting to go to new level from test
         	{
 				Game::Instance()->GetFSM().changeState(new TitleState()); // Change to title
         	}

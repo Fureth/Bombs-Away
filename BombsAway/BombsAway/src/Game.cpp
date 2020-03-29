@@ -155,6 +155,10 @@ void Game::createGameObjects()
 		// Select which map to load and "draw" it
 		switch (getCurrentLevel())
 		{
+		case 0:
+			m_pGameMapA->LoadMap(tutorialLevel);
+			setTimer(999);
+			break;
 		case 1:
 			m_pGameMapA->LoadMap(firstLevel);
 			setTimer(90);
@@ -165,8 +169,10 @@ void Game::createGameObjects()
             setTimer(200);
 			break;
 		case 3:
+			m_pGameMapA->LoadMap(thirdLevel);
+			setTimer(180);
 			break;
-		case -1:
+		case -2:
 			m_pGameMapA->LoadMap(test);
 			setTimer(999);
 			break;
@@ -364,6 +370,13 @@ void Game::update()
 		break;
 	case GAME: // Must update all game objects when in the game, and also check for FSM updates
 		updateGameObjects();
+		if (getCurrentLevel() == 3) // If on final level
+		{
+			if (m_pPlayer->getKeyEnemy()) // Boss is key enemy
+			{
+				GetFSM().pushState(new WinState); // If boss defeated, player wins game
+			}
+		}
 		break;
 	case PAUSE: // When paused only check for FSM updates
 		m_pFSM->update();
