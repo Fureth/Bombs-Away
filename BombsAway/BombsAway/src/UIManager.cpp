@@ -39,74 +39,187 @@ void UIManager::displayUI()
 
 	// Timer
 	TheTextureManager::Instance()->draw("time", 389, 0, 200, 70, TheGame::Instance()->getRenderer());
-	int tens = TheGame::Instance()->getTimer() / 10;
-	int ones = TheGame::Instance()->getTimer() % 10;
-	switch (tens)
+
+	
+	if (TheGame::Instance()->getTimer() >= 100) // Timer > 100s
 	{
-	case 0:
-		TheTextureManager::Instance()->draw("0", 500, -4, 80, 70, TheGame::Instance()->getRenderer());
-		break;
-	case 1:
-		TheTextureManager::Instance()->draw("1", 500, -5, 80, 70, TheGame::Instance()->getRenderer());
-		break;
-	case 2:
-		TheTextureManager::Instance()->draw("2", 510, -5, 80, 70, TheGame::Instance()->getRenderer());
-		break;
-	case 3:
-		TheTextureManager::Instance()->draw("3", 495, 0, 80, 70, TheGame::Instance()->getRenderer());
-		break;
-	case 4:
-		TheTextureManager::Instance()->draw("4", 510, 5, 80, 70, TheGame::Instance()->getRenderer());
-		break;
-	case 5:
-		TheTextureManager::Instance()->draw("5", 505, 0, 80, 70, TheGame::Instance()->getRenderer());
-		break;
-	case 6:
-		TheTextureManager::Instance()->draw("6", 505, 6, 80, 70, TheGame::Instance()->getRenderer());
-		break;
-	case 7:
-		TheTextureManager::Instance()->draw("7", 510, 6, 80, 70, TheGame::Instance()->getRenderer());
-		break;
-	case 8:
-		TheTextureManager::Instance()->draw("8", 515, 7, 80, 70, TheGame::Instance()->getRenderer());
-		break;
-	case 9:
-		TheTextureManager::Instance()->draw("9", 525, 7, 80, 70, TheGame::Instance()->getRenderer());
-		break;
+		int hundreds = TheGame::Instance()->getTimer() / 100;
+		int tens = (TheGame::Instance()->getTimer() % 100) / 10;
+		int ones = TheGame::Instance()->getTimer() % 10;
+		switch (hundreds)
+		{
+		case 0:
+			TheTextureManager::Instance()->draw("0", 500, -4, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 1:
+			TheTextureManager::Instance()->draw("1", 500, -5, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 2:
+			TheTextureManager::Instance()->draw("2", 510, -5, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 3:
+			TheTextureManager::Instance()->draw("3", 495, 0, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 4:
+			TheTextureManager::Instance()->draw("4", 510, 5, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 5:
+			TheTextureManager::Instance()->draw("5", 505, 0, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 6:
+			TheTextureManager::Instance()->draw("6", 505, 6, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 7:
+			TheTextureManager::Instance()->draw("7", 510, 6, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 8:
+			TheTextureManager::Instance()->draw("8", 515, 7, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 9:
+			TheTextureManager::Instance()->draw("9", 525, 7, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		}
+		switch (tens)
+		{
+		case 0:
+			TheTextureManager::Instance()->draw("0", 520, -4, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 1:
+			TheTextureManager::Instance()->draw("1", 520, -5, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 2:
+			TheTextureManager::Instance()->draw("2", 530, -5, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 3:
+			TheTextureManager::Instance()->draw("3", 515, 0, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 4:
+			TheTextureManager::Instance()->draw("4", 530, 5, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 5:
+			TheTextureManager::Instance()->draw("5", 525, 0, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 6:
+			TheTextureManager::Instance()->draw("6", 525, 6, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 7:
+			TheTextureManager::Instance()->draw("7", 530, 6, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 8:
+			TheTextureManager::Instance()->draw("8", 535, 7, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 9:
+			TheTextureManager::Instance()->draw("9", 545, 7, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		}
+		switch (ones)
+		{
+		case 0:
+			TheTextureManager::Instance()->draw("0", 540, -4, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 1:
+			TheTextureManager::Instance()->draw("1", 540, -5, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 2:
+			TheTextureManager::Instance()->draw("2", 550, -5, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 3:
+			TheTextureManager::Instance()->draw("3", 535, 0, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 4:
+			TheTextureManager::Instance()->draw("4", 550, 5, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 5:
+			TheTextureManager::Instance()->draw("5", 545, 0, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 6:
+			TheTextureManager::Instance()->draw("6", 545, 6, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 7:
+			TheTextureManager::Instance()->draw("7", 550, 6, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 8:
+			TheTextureManager::Instance()->draw("8", 555, 7, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 9:
+			TheTextureManager::Instance()->draw("9", 565, 7, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		}
 	}
-	switch (ones)
+	else // Timer < 100s
 	{
-	case 0:
-		TheTextureManager::Instance()->draw("0", 520, -4, 80, 70, TheGame::Instance()->getRenderer());
-		break;
-	case 1:
-		TheTextureManager::Instance()->draw("1", 520, -5, 80, 70, TheGame::Instance()->getRenderer());
-		break;
-	case 2:
-		TheTextureManager::Instance()->draw("2", 530, -5, 80, 70, TheGame::Instance()->getRenderer());
-		break;
-	case 3:
-		TheTextureManager::Instance()->draw("3", 515, 0, 80, 70, TheGame::Instance()->getRenderer());
-		break;
-	case 4:
-		TheTextureManager::Instance()->draw("4", 530, 5, 80, 70, TheGame::Instance()->getRenderer());
-		break;
-	case 5:
-		TheTextureManager::Instance()->draw("5", 525, 0, 80, 70, TheGame::Instance()->getRenderer());
-		break;
-	case 6:
-		TheTextureManager::Instance()->draw("6", 525, 6, 80, 70, TheGame::Instance()->getRenderer());
-		break;
-	case 7:
-		TheTextureManager::Instance()->draw("7", 530, 6, 80, 70, TheGame::Instance()->getRenderer());
-		break;
-	case 8:
-		TheTextureManager::Instance()->draw("8", 535, 7, 80, 70, TheGame::Instance()->getRenderer());
-		break;
-	case 9:
-		TheTextureManager::Instance()->draw("9", 545, 7, 80, 70, TheGame::Instance()->getRenderer());
-		break;
+		int tens = TheGame::Instance()->getTimer() / 10;
+		int ones = TheGame::Instance()->getTimer() % 10;
+		switch (tens)
+		{
+		case 0:
+			TheTextureManager::Instance()->draw("0", 500, -4, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 1:
+			TheTextureManager::Instance()->draw("1", 500, -5, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 2:
+			TheTextureManager::Instance()->draw("2", 510, -5, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 3:
+			TheTextureManager::Instance()->draw("3", 495, 0, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 4:
+			TheTextureManager::Instance()->draw("4", 510, 5, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 5:
+			TheTextureManager::Instance()->draw("5", 505, 0, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 6:
+			TheTextureManager::Instance()->draw("6", 505, 6, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 7:
+			TheTextureManager::Instance()->draw("7", 510, 6, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 8:
+			TheTextureManager::Instance()->draw("8", 515, 7, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 9:
+			TheTextureManager::Instance()->draw("9", 525, 7, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		}
+		switch (ones)
+		{
+		case 0:
+			TheTextureManager::Instance()->draw("0", 520, -4, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 1:
+			TheTextureManager::Instance()->draw("1", 520, -5, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 2:
+			TheTextureManager::Instance()->draw("2", 530, -5, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 3:
+			TheTextureManager::Instance()->draw("3", 515, 0, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 4:
+			TheTextureManager::Instance()->draw("4", 530, 5, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 5:
+			TheTextureManager::Instance()->draw("5", 525, 0, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 6:
+			TheTextureManager::Instance()->draw("6", 525, 6, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 7:
+			TheTextureManager::Instance()->draw("7", 530, 6, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 8:
+			TheTextureManager::Instance()->draw("8", 535, 7, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		case 9:
+			TheTextureManager::Instance()->draw("9", 545, 7, 80, 70, TheGame::Instance()->getRenderer());
+			break;
+		}
 	}
+	
+	
+	
 
 	// Player HP status
 	TheTextureManager::Instance()->draw("P1", 0, 40, 200, 70, TheGame::Instance()->getRenderer());

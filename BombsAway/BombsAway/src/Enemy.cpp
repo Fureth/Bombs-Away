@@ -1,21 +1,53 @@
 #include "Enemy.h"
 #include "Game.h"
 
-Enemy::Enemy(glm::vec2 startPos)
+Enemy::Enemy(glm::vec2 startPos, int enemyType)
 {
-	TheTextureManager::Instance()->load("../Assets/textures/enemy.png", "enemy", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("../Assets/textures/enemy-idle.png", "enemy", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("../Assets/textures/walk-back.png", "enemyUp", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("../Assets/textures/walk-front.png", "enemyDn", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("../Assets/textures/walk-left.png", "enemyLt", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("../Assets/textures/walk-right.png", "enemyRt", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("../Assets/textures/boss.png", "boss", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("../Assets/textures/ghostSamurai.png", "ghost", TheGame::Instance()->getRenderer());
+	
 	setPosition(startPos);
 	setPreviousPosition(getPosition());
-
-	glm::vec2 size = TheTextureManager::Instance()->getTextureSize("enemy");
-	//glm::vec2 size = glm::vec2(64, 64);
-	setVelocity(glm::vec2(2, 2));
+	
+	glm::vec2 size = glm::vec2(64, 64);
 	setWidth(size.x);
 	setHeight(size.y);
 	setIsColliding(false);
 	setType(ENEMY);
 	randomizeDirection();
-	currentHealth = 1;
+
+
+	switch (enemyType)
+	{
+	case 1: // Snail
+		currentHealth = 1;
+		enemySpeed = 1;
+		break;
+	case 2: // Ghost Samurai
+		currentHealth = 1;
+		enemySpeed = 4;
+		break;
+	case 3: // Boss
+		currentHealth = 2;
+		enemySpeed = 2;
+		keyEnemy = true;
+		break;
+	case 4: // Key Snail
+		currentHealth = 1;
+		enemySpeed = 1;
+		keyEnemy = true;
+		break;
+	default:
+		break;
+	}
+
+	this->enemyType = enemyType;
+	setVelocity(glm::vec2(enemySpeed, enemySpeed));
 }
 
 Enemy::~Enemy()
@@ -24,41 +56,178 @@ Enemy::~Enemy()
 
 void Enemy::draw()
 {
-	TheTextureManager::Instance()->draw("enemy", getPosition().x, getPosition().y, 64, 64, TheGame::Instance()->getRenderer());
-	int frameSelector = roamTimer / 10;
-	switch (frameSelector)
+	int rowSelector = 0;
+	int frameSelector = 0;
+	switch (enemyType)
 	{
-	case 0:
-		TheTextureManager::Instance()->drawFrame("enemy", getPosition().x, getPosition().y, 64, 64, 1, 0, TheGame::Instance()->getRenderer());
+	case 1: // Snail
+		switch (getDirection())
+		{
+		case NORTH: // Up
+			if (frameTimer > frameTimerMid)
+			{
+				TheTextureManager::Instance()->drawFrame("enemyUp", getPosition().x, getPosition().y, 64, 64, 1, 0, TheGame::Instance()->getRenderer());
+			}
+			else
+			{
+				TheTextureManager::Instance()->drawFrame("enemyUp", getPosition().x, getPosition().y, 64, 64, 2, 0, TheGame::Instance()->getRenderer());
+			}
+			break;
+		case SOUTH: // Down
+			if (frameTimer > frameTimerMid)
+			{
+				TheTextureManager::Instance()->drawFrame("enemyDn", getPosition().x, getPosition().y, 64, 64, 1, 0, TheGame::Instance()->getRenderer());
+			}
+			else
+			{
+				TheTextureManager::Instance()->drawFrame("enemyDn", getPosition().x, getPosition().y, 64, 64, 2, 0, TheGame::Instance()->getRenderer());
+			}
+			break;
+		case EAST: // Right
+			if (frameTimer > frameTimerMid)
+			{
+				TheTextureManager::Instance()->drawFrame("enemyRt", getPosition().x, getPosition().y, 64, 64, 1, 0, TheGame::Instance()->getRenderer());
+			}
+			else
+			{
+				TheTextureManager::Instance()->drawFrame("enemyRt", getPosition().x, getPosition().y, 64, 64, 2, 0, TheGame::Instance()->getRenderer());
+			}
+			break;
+		case WEST: // Left
+			if (frameTimer > frameTimerMid)
+			{
+				TheTextureManager::Instance()->drawFrame("enemyLt", getPosition().x, getPosition().y, 64, 64, 1, 0, TheGame::Instance()->getRenderer());
+			}
+			else
+			{
+				TheTextureManager::Instance()->drawFrame("enemyLt", getPosition().x, getPosition().y, 64, 64, 2, 0, TheGame::Instance()->getRenderer());
+			}
+			break;
+		}
 		break;
-	case 1:
-		TheTextureManager::Instance()->drawFrame("enemy", getPosition().x, getPosition().y, 64, 64, 2, 0, TheGame::Instance()->getRenderer());
+	case 2: // Ghost
+		frameSelector = frameTimer / 8;
+		switch (getDirection())
+		{
+		case NORTH: // Up
+			rowSelector = 1;
+			break;
+		case SOUTH: // Down
+			rowSelector = 2;
+			break;
+		case EAST: // Right
+			rowSelector = 4;
+			break;
+		case WEST: // Left
+			rowSelector = 3;
+			break;
+		}
+		TheTextureManager::Instance()->drawFrame("ghost", getPosition().x, getPosition().y, 64, 64, rowSelector, frameSelector, TheGame::Instance()->getRenderer());
 		break;
-	default:
+	case 3: // Boss
+		frameSelector = frameTimer / 10;
+		if (!isInvul || invFrame % 10 > 5)
+		{
+			switch (getDirection())
+			{
+			case NORTH: // Up
+				rowSelector = 1;
+				break;
+			case SOUTH: // Down
+				rowSelector = 2;
+				break;
+			case EAST: // Right
+				rowSelector = 4;
+				break;
+			case WEST: // Left
+				rowSelector = 3;
+				break;
+			}
+			TheTextureManager::Instance()->drawFrame("boss", getPosition().x, getPosition().y, 64, 64, rowSelector, frameSelector, TheGame::Instance()->getRenderer());
+		}
+		break;
+	case 4: // Key Snail
+		switch (getDirection())
+		{
+		case NORTH: // Up
+			if (frameTimer > frameTimerMid)
+			{
+				TheTextureManager::Instance()->drawFrame("enemyUp", getPosition().x, getPosition().y, 64, 64, 1, 0, TheGame::Instance()->getRenderer());
+			}
+			else
+			{
+				TheTextureManager::Instance()->drawFrame("enemyUp", getPosition().x, getPosition().y, 64, 64, 2, 0, TheGame::Instance()->getRenderer());
+			}
+			break;
+		case SOUTH: // Down
+			if (frameTimer > frameTimerMid)
+			{
+				TheTextureManager::Instance()->drawFrame("enemyDn", getPosition().x, getPosition().y, 64, 64, 1, 0, TheGame::Instance()->getRenderer());
+			}
+			else
+			{
+				TheTextureManager::Instance()->drawFrame("enemyDn", getPosition().x, getPosition().y, 64, 64, 2, 0, TheGame::Instance()->getRenderer());
+			}
+			break;
+		case EAST: // Right
+			if (frameTimer > frameTimerMid)
+			{
+				TheTextureManager::Instance()->drawFrame("enemyRt", getPosition().x, getPosition().y, 64, 64, 1, 0, TheGame::Instance()->getRenderer());
+			}
+			else
+			{
+				TheTextureManager::Instance()->drawFrame("enemyRt", getPosition().x, getPosition().y, 64, 64, 2, 0, TheGame::Instance()->getRenderer());
+			}
+			break;
+		case WEST: // Left
+			if (frameTimer > frameTimerMid)
+			{
+				TheTextureManager::Instance()->drawFrame("enemyLt", getPosition().x, getPosition().y, 64, 64, 1, 0, TheGame::Instance()->getRenderer());
+			}
+			else
+			{
+				TheTextureManager::Instance()->drawFrame("enemyLt", getPosition().x, getPosition().y, 64, 64, 2, 0, TheGame::Instance()->getRenderer());
+			}
+			break;
+		}
 		break;
 	}
+
 }
 
 void Enemy::update()
 {
 	if (getIsActive())
 	{
+		frameTimer++;
+		if (frameTimer >= frameTimerMax)
+		{
+			frameTimer = 0;
+		}
 		// If colliding, change direction
 		if (getIsColliding())
 		{
 			changeDirection();
 			setIsColliding(false);
 		}
+
+		// Check I-Frames
+		if (isInvul)
+		{
+			if (invFrame < invFrameMax)
+			{
+				invFrame++;
+			}
+			else if (invFrame >= invFrameMax)
+			{
+				isInvul = false;
+				invFrame = 0;
+			}
+		}
+		
 		wander();
 	}
-	if (roamTimer < roamTimerMax)
-	{
-		roamTimer++;
-	}
-	else
-	{
-		roamTimer = 0;
-	}
+
 }
 
 void Enemy::clean()
@@ -84,7 +253,6 @@ void Enemy::wander()
 		break;
 	case WEST: // Subtract x
 		setPosition(glm::vec2(getPosition().x - getVelocity().x, getPosition().y));
-		
 		break;
 	default:
 		break;
@@ -145,19 +313,15 @@ void Enemy::changeDirection()
 		{
 		case 0:
 			currentDirection = NORTH;
-			TheTextureManager::Instance()->load("../Assets/textures/walk-back.png", "enemy", TheGame::Instance()->getRenderer());
 			break;
 		case 1:
 			currentDirection = EAST;
-			TheTextureManager::Instance()->load("../Assets/textures/walk-right.png", "enemy", TheGame::Instance()->getRenderer());
 			break;
 		case 2:
 			currentDirection = SOUTH;
-			TheTextureManager::Instance()->load("../Assets/textures/walk-front.png", "enemy", TheGame::Instance()->getRenderer());
 			break;
 		case 3:
 			currentDirection = WEST;
-			TheTextureManager::Instance()->load("../Assets/textures/walk-left.png", "enemy", TheGame::Instance()->getRenderer());
 			break;
 		default:
 			currentDirection = NORTH;

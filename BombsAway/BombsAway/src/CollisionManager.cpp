@@ -181,8 +181,16 @@ bool CollisionManager::basicCollisionCheck(GameObject* object1, GameObject* obje
 				}
 				break;
             case ENEMY:
-				std::cout << "Enemy dies!" << std::endl;
-				object2->setIsActive(false);
+				if (!object2->isInvul)
+				{
+					object2->currentHealth -= 1;
+					object2->isInvul = true;
+				}
+				if (object2->currentHealth == 0)
+				{
+					std::cout << "Enemy dies!" << std::endl;
+					object2->setIsActive(false);
+				}
                 break;
 			default:
 				std::cout << "Explosion on unknown type!" << std::endl;
@@ -235,17 +243,19 @@ bool CollisionManager::tileCollisionCheck(GameObject* object, int tileMap[12][20
 			int tileType = tileMap[j][i];
 			if (Game::Instance()->checkForKeystroke(SDL_SCANCODE_F))
 				std::cout << i << " " << j << std::endl;
-			if (tileType == 1 || tileType == 2 || tileType == 3 || tileType == 4 || tileType == 5 || tileType == 10) // 1, 2, 4, 5 = Wall, 3 = Door, 10 = Hole
+			if (tileType == 1 || tileType == 2 || tileType == 3 || tileType == 4 || tileType == 10 || tileType == 14 || 
+				tileType == 15 || tileType == 16 || tileType == 17) // 1, 2, 4 = Wall, 3, 14, 15, 16, 17 = Door, 10 = Hole
 			{
 				//std::cout << "Collision with Wall!" << std::endl;
 				if (object->getType() == ENEMY)
 				{
 					object->setPosition(object->getPreviousPosition());
 				}
-                //if (tileType == DOOR)
-                //{
-                //    Game::Instance()->GetFSM().pushState(new WinState());
-                //}
+                if (object->getType() == PLAYER && (tileType == 3 || tileType == 14 ||
+					tileType == 15 || tileType == 16 || tileType == 17))
+                {
+					Game::Instance()->setDoorCheck(i, j);
+                }
 				return true;
 			}
 			

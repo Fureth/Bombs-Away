@@ -111,6 +111,16 @@ public:
 	int getCurrentLevel();
 	void setCurrentLevel(int newLevel);
 
+	// To close game from outside of Game.cpp
+	void exitGame();
+
+	void setActiveMap(int map);
+	Map* getActiveMap();
+	int getMapInt();
+
+	void setDoorCheck(int xCheck, int yCheck);
+	void clearVectors();
+
 private:
 	Game();
 	~Game();
@@ -133,7 +143,8 @@ private:
 	static Game* s_pInstance;
 
 	// GameObjects
-	Map* m_pGameMap; // Map class used to load current level
+	Map* m_pGameMapA; // Map class used to load current level
+	Map* m_pGameMapB;
 	Player* m_pPlayer;
 	Bomb* m_pBomb; // May need to make a vector later
 	Explosion* m_pExplosion; // May need to make a vector later
@@ -157,7 +168,7 @@ private:
 	
 	glm::vec2 m_mousePosition; // Holds vector of mouse position on screen.
 
-	
+	int activeMap = 1;
 };
 
 typedef Game TheGame;

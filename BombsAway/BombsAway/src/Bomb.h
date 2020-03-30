@@ -41,7 +41,7 @@ private:
 	bool hasExploded = false;
 	bool beenTossed = false;
     
-    const int bombTimerMax = 180;
+    const int bombTimerMax = 120;
 	
 	const int bombTossMoveMax = 3;
 

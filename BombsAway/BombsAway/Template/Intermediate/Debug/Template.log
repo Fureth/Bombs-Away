@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  Bomb.cpp
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Game.h(36,32): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Bomb.cpp(10,18): warning C4244:  'argument': conversion from 'T' to 'int', possible loss of data
@@ -410,3 +411,8 @@ C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Wall.cpp(39,73): wa
   Generating Code...
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Game.h(36,32): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
   Template.vcxproj -> C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\bin\Debug\Template.exe
+=======
+﻿  main.cpp
+C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\src\Game.h(36,32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Template.vcxproj -> C:\Users\B7ii12\Documents\Bombs-Away\BombsAway\BombsAway\bin\Debug\Template.exe
+>>>>>>> 77e5c4d4b0dd14a3b783e34c5381ec1dfcd22027

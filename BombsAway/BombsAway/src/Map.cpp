@@ -58,8 +58,8 @@ void Map::DrawMap()
 				TheGame::Instance()->getWallVector()->push_back(newWall);
 				newWall = nullptr;
 				break;
-            case 3: // Door
-                newDoor = new Door(column, row, 0);
+            case 3: // Door type 1
+                newDoor = new Door(column, row, 0, 1);
                 newDoor->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
                 TheGame::Instance()->getDoorVector()->push_back(newDoor);
                 newDoor = nullptr;
@@ -76,12 +76,7 @@ void Map::DrawMap()
 				TheGame::Instance()->getPowerupVector()->push_back(newPowerup);
 				newPowerup = nullptr;
 				break;
-			case 5: // Wall with key
-				// Make wall
-				newWall = new Wall(column, row, 2);
-				newWall->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
-				TheGame::Instance()->getWallVector()->push_back(newWall);
-				newWall = nullptr;
+			case 5: // Key
 				// Make key
 				newPowerup = new Powerup(1);
 				newPowerup->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
@@ -94,25 +89,75 @@ void Map::DrawMap()
 				TheGame::Instance()->getPowerupVector()->push_back(newPowerup);
 				newPowerup = nullptr;
 				break;
-			case 7:
+			case 7: // Throwable bomb
 				newPowerup = new Powerup(2);
 				newPowerup->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
 				TheGame::Instance()->getPowerupVector()->push_back(newPowerup);
 				newPowerup = nullptr;
 				break;
-			case 8: // Enemy A
-				newEnemy = new Enemy(glm::vec2(64 * column, 210 + (64 * row)));
+			case 8: // Snail
+				newEnemy = new Enemy(glm::vec2(64 * column, 210 + (64 * row)), 1);
 				TheGame::Instance()->getEnemyVector()->push_back(newEnemy);
 				newEnemy = nullptr;
 				break;
 			case 9: // Player
-				TheGame::Instance()->getPlayerObject()->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
+				if (!Game::Instance()->getPlayerObject()->getSpawn())
+				{
+					TheGame::Instance()->getPlayerObject()->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
+					TheGame::Instance()->getPlayerObject()->setSpawn(true);
+				}
 				break;
 			case 10: // Holes
 				newHole = new Hole(column, row);
 				newHole->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
 				TheGame::Instance()->getHoleVector()->push_back(newHole);
 				newHole = nullptr;
+				break;
+			case 11: // Ghost Samurai
+				newEnemy = new Enemy(glm::vec2(64 * column, 210 + (64 * row)), 2);
+				TheGame::Instance()->getEnemyVector()->push_back(newEnemy);
+				newEnemy = nullptr;
+				break;
+			case 12: // Boss
+				newEnemy = new Enemy(glm::vec2(64 * column, 210 + (64 * row)), 3);
+				TheGame::Instance()->getEnemyVector()->push_back(newEnemy);
+				newEnemy = nullptr;
+				break;
+			case 13: // Player position on transition
+				if (Game::Instance()->getPlayerObject()->getSpawn())
+				{
+					TheGame::Instance()->getPlayerObject()->setPreviousPosition(glm::vec2(64 * column, 210 + (64 * row)));
+					TheGame::Instance()->getPlayerObject()->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
+				}
+				break;
+			case 14:
+				newDoor = new Door(column, row, 0, 2);
+				newDoor->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
+				TheGame::Instance()->getDoorVector()->push_back(newDoor);
+				newDoor = nullptr;
+				break;
+			case 15:
+				newDoor = new Door(column, row, 0, 3);
+				newDoor->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
+				TheGame::Instance()->getDoorVector()->push_back(newDoor);
+				newDoor = nullptr;
+				break;
+			case 16:
+				newDoor = new Door(column, row, 0, 4);
+				newDoor->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
+				TheGame::Instance()->getDoorVector()->push_back(newDoor);
+				newDoor = nullptr;
+				break;
+			case 17:
+				newDoor = new Door(column, row, 0, 5);
+				newDoor->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
+				TheGame::Instance()->getDoorVector()->push_back(newDoor);
+				newDoor = nullptr;
+				break;
+			case 18:
+				newEnemy = new Enemy(glm::vec2(64 * column, 210 + (64 * row)), 4);
+				TheGame::Instance()->getEnemyVector()->push_back(newEnemy);
+				newEnemy = nullptr;
 				break;
 			default:
 				break;
