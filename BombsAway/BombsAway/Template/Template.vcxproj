@@ -24,6 +24,7 @@
     <ClCompile Include="..\src\Door.cpp" />
     <ClCompile Include="..\src\Enemy.cpp" />
     <ClCompile Include="..\src\Explosion.cpp" />
+    <ClCompile Include="..\src\Floor.cpp" />
     <ClCompile Include="..\src\FSM.cpp" />
     <ClCompile Include="..\src\Game.cpp" />
     <ClCompile Include="..\src\GameObject.cpp" />
@@ -43,6 +44,7 @@
     <ClInclude Include="..\src\Door.h" />
     <ClInclude Include="..\src\Enemy.h" />
     <ClInclude Include="..\src\Explosion.h" />
+    <ClInclude Include="..\src\Floor.h" />
     <ClInclude Include="..\src\FSM.h" />
     <ClInclude Include="..\src\Game.h" />
     <ClInclude Include="..\src\GameObject.h" />

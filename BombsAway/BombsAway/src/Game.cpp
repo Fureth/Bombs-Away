@@ -160,13 +160,10 @@ void Game::createGameObjects()
 			setTimer(999);
 			break;
 		case 1:
-<<<<<<< HEAD
-			m_pGameMap->LoadMap(thirdLevel);
+			m_pGameMapA->LoadMap(thirdLevel);
 			setTimer(99);
-=======
 			m_pGameMapA->LoadMap(firstLevel);
 			setTimer(90);
->>>>>>> 77e5c4d4b0dd14a3b783e34c5381ec1dfcd22027
 			break;
 		case 2:
             m_pGameMapA->LoadMap(secondLevelA);
@@ -257,6 +254,11 @@ std::vector<Door*>* Game::getDoorVector()
 std::vector<Hole*>* Game::getHoleVector()
 {
 	return &m_pHoleVec;
+}
+
+std::vector<Floor*>* Game::getFloorVector()
+{
+    return &m_pFloorVec;
 }
 
 bool Game::init(const char* title, int xpos, int ypos, int height, int width, bool fullscreen)

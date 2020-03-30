@@ -72,6 +72,9 @@
     <ClCompile Include="..\src\Door.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Floor.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Game.h">
@@ -126,6 +129,9 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Door.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Floor.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>

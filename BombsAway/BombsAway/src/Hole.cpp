@@ -3,7 +3,7 @@
 
 Hole::Hole(int xPos, int yPos)
 {
-	TheTextureManager::Instance()->load("../Assets/textures/floor.png", "floor", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("../Assets/textures/floor.png", "hole", TheGame::Instance()->getRenderer());
 
 	this->xPos = xPos;
 	this->yPos = yPos;
@@ -21,7 +21,7 @@ Hole::~Hole()
 
 void Hole::draw()
 {
-	TheTextureManager::Instance()->drawFrame("floor", getPosition().x, getPosition().y, 64, 64, 1, 1, TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->drawFrame("hole", getPosition().x, getPosition().y, 64, 64, 1, 1, TheGame::Instance()->getRenderer());
 }
 
 void Hole::update()

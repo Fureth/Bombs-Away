@@ -29,6 +29,7 @@
 #include "Powerup.h"
 #include "Door.h"
 #include "Hole.h"
+#include "Floor.h"
 
 const int FPS = 60;
 const int WINDOW_WIDTH = 1280;
@@ -96,6 +97,7 @@ public:
 	std::vector<Powerup*>* getPowerupVector();
     std::vector<Door*>* getDoorVector();
 	std::vector<Hole*>* getHoleVector();
+    std::vector<Floor*>* getFloorVector();
 
 	// Mousebutton getter/setter
 	bool getMouseBtn(int i);
@@ -163,6 +165,9 @@ private:
 
 	// Vector of Hole GameObjects
 	std::vector<Hole*> m_pHoleVec;
+
+    // Vector of Floor GameObjects
+    std::vector<Floor*> m_pFloorVec;
 	
 	const Uint8* m_iKeystates; // Keyboard state container.
 	

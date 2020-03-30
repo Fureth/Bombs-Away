@@ -10,5 +10,6 @@ enum GameObjectType {
 	ENEMY,
 	POWERUP,
 	HOLE,
+    FLOOR,
 	NUM_OF_TYPES
 };

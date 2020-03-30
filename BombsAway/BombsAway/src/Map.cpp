@@ -32,6 +32,7 @@ void Map::DrawMap()
 	Powerup* newPowerup;
     Door* newDoor;
 	Hole* newHole;
+    Floor* newFloor;
 
 
 	for (int row = 0; row < MAP_HEIGHT; row++)
@@ -44,7 +45,11 @@ void Map::DrawMap()
 
 			switch (type)
 			{
-			case 0: // Empty space
+			case 0: // Normal Floor
+                newFloor = new Floor(column, row);
+                newFloor->setPosition(glm::vec2(64 * column, 210 + (64 * row)));
+                TheGame::Instance()->getFloorVector()->push_back(newFloor);
+                newFloor = nullptr;
 				break;
 			case 1: // Basic wall
 				newWall = new Wall(column, row, 2);
