@@ -26,7 +26,7 @@ void State::setType(StateType newType)
 PauseState::PauseState()
 {
 	std::cout << "Rendering Pause..." << std::endl;
-	TheTextureManager::Instance()->load("../Assets/textures/Pause.png", "pause", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("../Assets/textures/new_pause.png", "pause", TheGame::Instance()->getRenderer());
 	setType(PAUSE);
 }
 
@@ -178,7 +178,7 @@ void TitleState::exit()
 OptionsState::OptionsState()
 {
 	std::cout << "Rendering Controls...\n";
-	TheTextureManager::Instance()->load("../Assets/textures/Controls.png", "controls", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("../Assets/textures/Controls_Black.png", "controls", TheGame::Instance()->getRenderer());
 	setType(OPTIONS);
 }
 
