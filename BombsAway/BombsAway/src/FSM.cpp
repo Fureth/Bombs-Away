@@ -191,7 +191,7 @@ void OptionsState::update()
 {
 	if (Game::Instance()->getMouseBtn(0))
 	{
-		if ((1024 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 1244) && (28 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 100))
+		if ((1164 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 1238) && (42 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 137))
 		{
 			// Back to Title page
 			Game::Instance()->GetFSM().changeState(new TitleState());
