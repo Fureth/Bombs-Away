@@ -72,10 +72,10 @@ GameState::GameState()
 	std::cout << "Rendering Game..." << std::endl;
 	TheTextureManager::Instance()->load("../Assets/textures/Game.png", "game", TheGame::Instance()->getRenderer());
 
-	TheSoundManager::Instance()->load("../Assets/audio/nya.WAV",
+	/*TheSoundManager::Instance()->load("../Assets/audio/nya.WAV",
 		"bgm", sound_type::SOUND_MUSIC);
 
-	TheSoundManager::Instance()->playMusic("bgm", -1);
+	TheSoundManager::Instance()->playMusic("bgm", -1);*/
 
 	setType(GAME);
 }
@@ -83,6 +83,7 @@ GameState::GameState()
 void GameState::enter()
 {
 	std::cout << "Entering Game..." << std::endl;
+	TheSoundManager::Instance()->playMusic("bgm", -1);
 }
 
 void GameState::update()
@@ -138,7 +139,7 @@ void TitleState::update()
 		if ((451 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 830) && (388 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 513))
 		{
 			// Start new game
-			Game::Instance()->setCurrentLevel(1);
+			Game::Instance()->setCurrentLevel(0);
 			Game::Instance()->GetFSM().changeState(new GameState());
 			Game::Instance()->createGameObjects();
 		}
@@ -155,7 +156,7 @@ void TitleState::update()
 	}
 	if (Game::Instance()->checkForKeystroke(SDL_SCANCODE_SEMICOLON))
 	{
-		Game::Instance()->setCurrentLevel(-1);
+		Game::Instance()->setCurrentLevel(-2);
 		Game::Instance()->GetFSM().changeState(new Dev());
 		Game::Instance()->createGameObjects();
 	}
@@ -262,17 +263,26 @@ void WinState::enter()
 
 void WinState::update()
 {
-    // Need adjustment
-    //if (Game::Instance()->getMouseBtn(0))
-    //{
-    //    if ((732 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 1126) && (664 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 768))
-    //    {
-    //        Game::Instance()->setMouseBtn(0, false);
-    //        Game::Instance()->GetFSM().popState();
-    //        Game::Instance()->GetFSM().changeState(new TitleState());
-    //        Game::Instance()->deleteGameObjects();
-    //    }
-    //}
+    
+    if (Game::Instance()->getMouseBtn(0))
+    {
+        if ((653 <= Game::Instance()->getMousePosition().x) && (Game::Instance()->getMousePosition().x <= 1091) && (613 <= Game::Instance()->getMousePosition().y) && (Game::Instance()->getMousePosition().y <= 745))
+        {
+            Game::Instance()->setMouseBtn(0, false);
+            Game::Instance()->GetFSM().popState(); // Remove winstate
+			Game::Instance()->deleteGameObjects(); // Delete the current gameobjects/map
+			Game::Instance()->setCurrentLevel(Game::Instance()->getCurrentLevel() + 1);
+			if (Game::Instance()->getCurrentLevel() == -1 || Game::Instance()->getCurrentLevel() > 3) // If attempting to go to new level from test
+        	{
+				Game::Instance()->GetFSM().changeState(new TitleState()); // Change to title
+        	}
+			else // Otherwise go to next level
+			{
+				Game::Instance()->GetFSM().changeState(new GameState()); // Change to a new gamestate, which reloads the new map
+				Game::Instance()->createGameObjects();
+			}
+        }
+    }
 }
 
 void WinState::render()

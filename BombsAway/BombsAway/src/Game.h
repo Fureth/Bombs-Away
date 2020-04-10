@@ -89,6 +89,7 @@ public:
 
 	// Functions which return pointers to game objects for use in other classes (Currently unused ones are commented out)
 	Player* getPlayerObject();
+	Player* getPlayer2Object();
 	Bomb* getBombObject();
 	Explosion* getExplosionObject();
 	std::vector<Wall*>* getWallVector(); // Returns pointer to wall vector (of pointers to wall objects)
@@ -107,30 +108,20 @@ public:
 	int timerCount = 0;
 	const int timerCountMax = 60;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> b839997980093adeb310aba82ba329fc2aa93d91
->>>>>>> master
 	// Level Select Getter/Setter
 	int getCurrentLevel();
 	void setCurrentLevel(int newLevel);
 
-<<<<<<< HEAD
 	// To close game from outside of Game.cpp
 	void exitGame();
 
->>>>>>> dc3582c195962cae77a3339080af0a0c60d66708
-=======
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> b839997980093adeb310aba82ba329fc2aa93d91
->>>>>>> master
+	void setActiveMap(int map);
+	Map* getActiveMap();
+	int getMapInt();
+
+	void setDoorCheck(int xCheck, int yCheck);
+	void clearVectors();
+
 private:
 	Game();
 	~Game();
@@ -153,8 +144,10 @@ private:
 	static Game* s_pInstance;
 
 	// GameObjects
-	Map* m_pGameMap; // Map class used to load current level
+	Map* m_pGameMapA; // Map class used to load current level
+	Map* m_pGameMapB;
 	Player* m_pPlayer;
+	Player* m_pPlayer2;
 	Bomb* m_pBomb; // May need to make a vector later
 	Explosion* m_pExplosion; // May need to make a vector later
 
@@ -177,7 +170,7 @@ private:
 	
 	glm::vec2 m_mousePosition; // Holds vector of mouse position on screen.
 
-	
+	int activeMap = 1;
 };
 
 typedef Game TheGame;

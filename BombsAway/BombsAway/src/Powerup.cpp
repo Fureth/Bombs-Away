@@ -44,9 +44,8 @@ void Powerup::update()
 			break;
 		case 1: // Key
 			// Add some way to trigger door, maybe a boolean flag within class?
-            //TheGame::Instance()->getPlayerObject()->keyCollected(true);
+            TheGame::Instance()->getPlayerObject()->setKey(true);
             std::cout << "Key added!" << endl;
-            getHasKey() == true;
 			break;
 		case 2: // Throwable bomb powerup
 			TheGame::Instance()->getPlayerObject()->setThrow(true);

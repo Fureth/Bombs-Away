@@ -21,10 +21,12 @@ public:
 
 	bool getExplosion();
 	void setExplosion(bool boom);
+	bool hitBox = false;
 
 private:
 	bool activeExplosion = false;
 	const int explosionTimerMax = 60;
+	int explosionHurtTimerMax = 6;
 	int explosionTimer = 0;
 };
 

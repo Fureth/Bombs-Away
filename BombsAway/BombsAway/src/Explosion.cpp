@@ -67,6 +67,14 @@ void Explosion::update()
 {
 	if (getExplosion())
 	{
+		if (explosionTimer < explosionHurtTimerMax)
+		{
+			hitBox = true;
+		}
+		else
+		{
+			hitBox = false;
+		}
 		if (explosionTimer < explosionTimerMax)
 		{
 			explosionTimer++;

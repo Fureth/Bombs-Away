@@ -26,15 +26,6 @@ bool Game::checkForKeystroke(SDL_Scancode c)
 	return false;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> b839997980093adeb310aba82ba329fc2aa93d91
->>>>>>> master
 int Game::getCurrentLevel()
 {
 	return m_currentLevel;
@@ -45,19 +36,100 @@ void Game::setCurrentLevel(int newLevel)
 	m_currentLevel = newLevel;
 }
 
-<<<<<<< HEAD
 void Game::exitGame()
 {
 	m_bRunning = false;
 }
 
->>>>>>> dc3582c195962cae77a3339080af0a0c60d66708
-=======
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> b839997980093adeb310aba82ba329fc2aa93d91
->>>>>>> master
+void Game::setActiveMap(int map)
+{
+	activeMap = map;
+	//clearVectors(); // Clear map-specific vectors
+	//getActiveMap()->DrawMap(); // Re-populate map-specific vectors
+}
+
+Map* Game::getActiveMap()
+{
+	switch (activeMap)
+	{
+	case 1:
+		if (m_pGameMapA != nullptr)
+		{
+			return m_pGameMapA;
+		}
+		return nullptr;
+	case 2:
+		if (m_pGameMapB != nullptr)
+		{
+			return m_pGameMapB;
+		}
+		return nullptr;
+	default:
+		return nullptr;
+	}
+}
+
+int Game::getMapInt()
+{
+	return activeMap;
+}
+
+void Game::setDoorCheck(int xCheck, int yCheck)
+{
+	for (auto& door : m_pDoorVec)
+	{
+		if (door->xPos == xCheck && door->yPos == yCheck)
+		{
+			door->update();
+			break;
+		}
+	}
+}
+
+void Game::clearVectors()
+{
+	if (!m_pWallVec.empty())
+	{
+		for (auto& currentWall : m_pWallVec)
+		{
+			currentWall = nullptr;
+		}
+		m_pWallVec.erase(remove(m_pWallVec.begin(), m_pWallVec.end(), nullptr), m_pWallVec.end());
+	}
+	if (!m_pEnemyVec.empty())
+	{
+		for (auto& currentEnemy : m_pEnemyVec)
+		{
+			currentEnemy = nullptr;
+		}
+		m_pEnemyVec.erase(remove(m_pEnemyVec.begin(), m_pEnemyVec.end(), nullptr), m_pEnemyVec.end());
+	}
+	if (!m_pPowerupVec.empty())
+	{
+		for (auto& currentPowerup : m_pPowerupVec)
+		{
+			currentPowerup = nullptr;
+		}
+		m_pPowerupVec.erase(remove(m_pPowerupVec.begin(), m_pPowerupVec.end(), nullptr), m_pPowerupVec.end());
+	}
+	if (!m_pDoorVec.empty())
+	{
+		for (auto& currentDoor : m_pDoorVec)
+		{
+			currentDoor = nullptr;
+		}
+		m_pDoorVec.erase(remove(m_pDoorVec.begin(), m_pDoorVec.end(), nullptr), m_pDoorVec.end());
+	}
+	if (!m_pHoleVec.empty())
+	{
+		for (auto& currentHole : m_pHoleVec)
+		{
+			currentHole = nullptr;
+		}
+		m_pHoleVec.erase(remove(m_pHoleVec.begin(), m_pHoleVec.end(), nullptr), m_pHoleVec.end());
+	}
+}
+
 Game::Game()
 {
 	m_iKeystates = SDL_GetKeyboardState(nullptr); // start reading keyboard states, returns pointer
@@ -72,28 +144,37 @@ void Game::createGameObjects()
 {
 	if (!m_bObjectsCreated)
 	{
-		// Create most objects
-		m_pPlayer = new Player();
+		// Create most objects. These are static between screen transition
+		m_pPlayer = new Player(1);
+		m_pPlayer2 = new Player(2);
 		m_pBomb = new Bomb();
 		m_pExplosion = new Explosion();
-		m_pGameMap = new Map();
+		m_pGameMapA = new Map();
+		m_pGameMapB = new Map();
 
+		setActiveMap(1);
 		// Select which map to load and "draw" it
 		switch (getCurrentLevel())
 		{
+		case 0:
+			m_pGameMapA->LoadMap(tutorialLevel);
+			setTimer(999);
+			break;
 		case 1:
-			m_pGameMap->LoadMap(firstLevel);
-			setTimer(99);
+			m_pGameMapA->LoadMap(firstLevel);
+			setTimer(90);
 			break;
 		case 2:
-            m_pGameMap->LoadMap(secondLevelA);
-            m_pGameMap->LoadMap(secondLevelB);
-            setTimer(99);
+            m_pGameMapA->LoadMap(secondLevelA);
+            m_pGameMapB->LoadMap(secondLevelB);
+            setTimer(200);
 			break;
 		case 3:
+			m_pGameMapA->LoadMap(thirdLevel);
+			setTimer(180);
 			break;
-		case -1:
-			m_pGameMap->LoadMap(test);
+		case -2:
+			m_pGameMapA->LoadMap(test);
 			setTimer(999);
 			break;
 		default:
@@ -101,16 +182,11 @@ void Game::createGameObjects()
 			m_bRunning = false;
 			break;
 		}
-		m_pGameMap->DrawMap();
+		m_pGameMapA->DrawMap();
 
 		timerCount = 0;
 
 		m_bObjectsCreated = true;
-
-		TheSoundManager::Instance()->load("../Assets/audios/nya.mp3",
-			"bgm", sound_type::SOUND_MUSIC);
-
-		TheSoundManager::Instance()->playMusic("bgm", -1);
 	}
 }
 
@@ -119,39 +195,18 @@ void Game::deleteGameObjects()
 	if (m_bObjectsCreated)
 	{
 		delete m_pPlayer;
+		delete m_pPlayer2;
 		delete m_pBomb;
 		delete m_pExplosion;
-		delete m_pGameMap;
+		delete m_pGameMapA;
 
 		m_pPlayer = nullptr;
+		m_pPlayer2 = nullptr;
 		m_pBomb = nullptr;
 		m_pExplosion = nullptr;
-		m_pGameMap = nullptr;
+		m_pGameMapA = nullptr;
 
-		if (!m_pWallVec.empty())
-		{
-			for (auto& currentWall : m_pWallVec)
-			{
-				currentWall = nullptr;
-			}
-			m_pWallVec.erase(remove(m_pWallVec.begin(), m_pWallVec.end(), nullptr), m_pWallVec.end());
-		}
-		if (!m_pEnemyVec.empty())
-		{
-			for (auto& currentEnemy : m_pEnemyVec)
-			{
-				currentEnemy = nullptr;
-			}
-			m_pEnemyVec.erase(remove(m_pEnemyVec.begin(), m_pEnemyVec.end(), nullptr), m_pEnemyVec.end());
-		}
-		if (!m_pPowerupVec.empty())
-		{
-			for (auto& currentPowerup : m_pPowerupVec)
-			{
-				currentPowerup = nullptr;
-			}
-			m_pPowerupVec.erase(remove(m_pPowerupVec.begin(), m_pPowerupVec.end(), nullptr), m_pPowerupVec.end());
-		}
+		clearVectors();
 
 		m_bObjectsCreated = false;
 	}
@@ -165,6 +220,11 @@ bool Game::getObjectsCreated()
 Player* Game::getPlayerObject()
 {
 	return m_pPlayer;
+}
+
+Player* Game::getPlayer2Object()
+{
+	return m_pPlayer2;
 }
 
 Bomb* Game::getBombObject()
@@ -252,7 +312,8 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, bo
 
 	// Load UI
 	UI::loadUI();
-	
+	TheSoundManager::Instance()->load("../Assets/audios/nya.mp3",
+		"bgm", sound_type::SOUND_MUSIC);
 	std::cout << "init success" << std::endl;
 	m_bRunning = true; // everything initialized successfully - start the main loop
 	
@@ -287,6 +348,11 @@ void Game::render()
 		renderGameObjects();
 		m_pFSM->render();
 		break;
+	case WIN:
+		Instance()->GetFSM().getStates().front()->render(); // Invoke Render of GameState.
+		renderGameObjects();
+		m_pFSM->render();
+		break;
 	case TEST:
 		renderGameObjects();
 		break;
@@ -312,6 +378,17 @@ void Game::update()
 		break;
 	case GAME: // Must update all game objects when in the game, and also check for FSM updates
 		updateGameObjects();
+		if (getCurrentLevel() == 3) // If on final level
+		{
+			if (m_pPlayer->getKeyEnemy()) // Boss is key enemy
+			{
+				GetFSM().pushState(new WinState); // If boss defeated, player wins game
+			}
+			if (m_pPlayer2->getKeyEnemy()) // Boss is key enemy
+			{
+				GetFSM().pushState(new WinState); // If boss defeated, player wins game
+			}
+		}
 		break;
 	case PAUSE: // When paused only check for FSM updates
 		m_pFSM->update();
@@ -320,6 +397,9 @@ void Game::update()
 		m_pFSM->update();
 		break;
 	case LOSE:
+		m_pFSM->update();
+		break;
+	case WIN:
 		m_pFSM->update();
 		break;
 	case TEST:
@@ -417,10 +497,11 @@ void Game::updateGameObjects()
 {
 	m_pFSM->update();
 	m_pPlayer->update();
+	m_pPlayer2->update();
 	m_pBomb->update();
 
 	// Might be able to move this into explosion class, although it seems unlikely due to collision calls
-	if (m_pExplosion->getExplosion())
+	if (m_pExplosion->getExplosion() && m_pExplosion->hitBox)
 	{
 		// Explosion vs Wall
 		for (auto& currentWall : m_pWallVec)
@@ -429,14 +510,15 @@ void Game::updateGameObjects()
 			currentWall->update();
 			if (currentWall->getDestruction())
 			{
-				m_pGameMap->currentMap[currentWall->getY()][currentWall->getX()] = 0;
+				getActiveMap()->currentMap[currentWall->getY()][currentWall->getX()] = 0;
 				delete currentWall;
 				currentWall = nullptr;
 			}
 		}
 
-		// Explosion vs player
+		// Explosion vs players
 		Collision::basicCollisionCheck(m_pExplosion, m_pPlayer);
+		Collision::basicCollisionCheck(m_pExplosion, m_pPlayer2);
 
 		// Explosion vs Enemies
 		for (auto& currentEnemy : m_pEnemyVec)
@@ -444,13 +526,26 @@ void Game::updateGameObjects()
 			Collision::basicCollisionCheck(m_pExplosion, currentEnemy);
 			if (!currentEnemy->getIsActive())
 			{
+				if (currentEnemy->keyEnemy)
+				{
+					m_pPlayer->setKeyEnemy(true);
+					cout << "Key enemy killed!\n";
+				}
 				delete currentEnemy;
 				currentEnemy = nullptr;
+				if (currentEnemy->keyEnemy)
+				{
+					m_pPlayer2->setKeyEnemy(true);
+					cout << "Key enemy killed!\n";
+				}
+				delete currentEnemy;
+				currentEnemy = nullptr;
+
 			}
 
 		}
 	}
-
+	
 	m_pExplosion->update();
 
 	// Remove any destroyed walls from vector
@@ -467,15 +562,20 @@ void Game::updateGameObjects()
 
 	for (auto& currentEnemy : m_pEnemyVec)
 	{
-		currentEnemy->setIsColliding(Collision::tileCollisionCheck(currentEnemy, m_pGameMap->currentMap));
+		currentEnemy->setIsColliding(Collision::tileCollisionCheck(currentEnemy, getActiveMap()->currentMap));
 		currentEnemy->update();
 		// Enemy & Player collisions
 		Collision::basicCollisionCheck(m_pPlayer, currentEnemy);
+		Collision::basicCollisionCheck(m_pPlayer2, currentEnemy);
 	}
 
 	for (auto& currentPowerup : m_pPowerupVec)
 	{
-		if (Collision::basicCollisionCheck(m_pPlayer, currentPowerup) && !Collision::tileCollisionCheck(m_pPlayer, m_pGameMap->currentMap))
+		if (Collision::basicCollisionCheck(m_pPlayer, currentPowerup) && !Collision::tileCollisionCheck(m_pPlayer, getActiveMap()->currentMap))
+		{
+			currentPowerup->setCollected();
+		}
+		if (Collision::basicCollisionCheck(m_pPlayer2, currentPowerup) && !Collision::tileCollisionCheck(m_pPlayer2, getActiveMap()->currentMap))
 		{
 			currentPowerup->setCollected();
 		}
@@ -530,10 +630,33 @@ void Game::updateGameObjects()
 
 	
 	// Player vs Wall collision checker (map based) -- Might be able to change this a bit
-	m_pPlayer->setIsColliding(Collision::tileCollisionCheck(m_pPlayer, m_pGameMap->currentMap));
+	m_pPlayer->setIsColliding(Collision::tileCollisionCheck(m_pPlayer, getActiveMap()->currentMap));
 	if (m_pPlayer->getIsColliding())
 	{
-		m_pPlayer->setIsColliding(Collision::playerCollisionMovement(m_pPlayer, m_pGameMap->currentMap));
+		m_pPlayer->setIsColliding(Collision::playerCollisionMovement(m_pPlayer, getActiveMap()->currentMap));
+	}
+	m_pPlayer2->setIsColliding(Collision::tileCollisionCheck(m_pPlayer2, getActiveMap()->currentMap));
+	if (m_pPlayer2->getIsColliding())
+	{
+		m_pPlayer2->setIsColliding(Collision::playerCollisionMovement(m_pPlayer2, getActiveMap()->currentMap));
+	}
+
+	// Door removal check
+	for (auto& currentDoor : m_pDoorVec)
+	{
+		if (currentDoor->isDestroyed)
+		{
+			getActiveMap()->currentMap[currentDoor->yPos][currentDoor->xPos] = 0;
+			delete currentDoor;
+			currentDoor = nullptr;
+		}
+	}
+
+	// Remove cleared door from vector
+	if (!m_pDoorVec.empty())
+	{
+		m_pDoorVec.erase(remove(m_pDoorVec.begin(), m_pDoorVec.end(), nullptr), m_pDoorVec.end());
+
 	}
 
 	// Decrement game timer
@@ -549,6 +672,7 @@ void Game::updateGameObjects()
 	if (getTimer() == 0)
 	{
 		m_pPlayer->setIsActive(false);
+		m_pPlayer2->setIsActive(false);
 	}
 }
 
@@ -556,6 +680,7 @@ void Game::renderGameObjects()
 {
 	m_pBomb->draw();
 	m_pPlayer->draw();
+	m_pPlayer2->draw2();
 	for (auto& currentPowerup : m_pPowerupVec)
 	{
 		currentPowerup->draw();

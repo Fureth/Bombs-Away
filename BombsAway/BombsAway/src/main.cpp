@@ -29,10 +29,10 @@ int main(int argc, char* args[])
 	Uint32 frameStart, frameTime;
 
 	// show console
-	AllocConsole();
-	freopen("CON", "w", stdout);
+	/*AllocConsole();
+	freopen("CON", "w", stdout);*/
 
-	TheGame::Instance()->init("Bombs Away - First Playable", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, false);
+	TheGame::Instance()->init("Bombs Away - Beta Build", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, false);
 
 	while (TheGame::Instance()->running())
 	{
