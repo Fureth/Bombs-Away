@@ -45,7 +45,7 @@ private:
 	
 	const int bombTossMoveMax = 3;
 
-	Direction thrownFrom = NORTH;
+	Direction thrownFrom = EAST;
 };
 
 

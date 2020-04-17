@@ -42,10 +42,10 @@ void Bomb::update()
 				setPosition(glm::vec2(getPosition().x, getPosition().y + 64));
 				break;
 			case WEST:
-				setPosition(glm::vec2(getPosition().x - 64, getPosition().y));
+				setPosition(glm::vec2(getPosition().x - 128, getPosition().y));
 				break;
 			case EAST:
-				setPosition(glm::vec2(getPosition().x + 64, getPosition().y));
+				setPosition(glm::vec2(getPosition().x + 130, getPosition().y));
 				break;
 			}
 			if (bombTossMove >= bombTossMoveMax)
