@@ -83,7 +83,7 @@ GameState::GameState()
 void GameState::enter()
 {
 	std::cout << "Entering Game..." << std::endl;
-	TheSoundManager::Instance()->playMusic("bgm", -1);
+	//TheSoundManager::Instance()->playMusic("bgm", -1);
 }
 
 void GameState::update()

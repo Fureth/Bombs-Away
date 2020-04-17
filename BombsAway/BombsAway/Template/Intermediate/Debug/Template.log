@@ -1,3 +1,14 @@
-﻿  FSM.cpp
+﻿  Game.cpp
 C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Game.h(37,32): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Game.cpp(136,12): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Game.cpp(462,36): warning C4244:  '=': conversion from 'Sint32' to 'T', possible loss of data
+C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Game.cpp(462,36): warning C4244:         with
+C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Game.cpp(462,36): warning C4244:         [
+C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Game.cpp(462,36): warning C4244:             T=float
+C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Game.cpp(462,36): warning C4244:         ]
+C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Game.cpp(463,36): warning C4244:  '=': conversion from 'Sint32' to 'T', possible loss of data
+C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Game.cpp(463,36): warning C4244:         with
+C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Game.cpp(463,36): warning C4244:         [
+C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Game.cpp(463,36): warning C4244:             T=float
+C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\src\Game.cpp(463,36): warning C4244:         ]
   Template.vcxproj -> C:\Users\Danie\Desktop\Git BombsAway\BombsAway\BombsAway\bin\Debug\Template.exe

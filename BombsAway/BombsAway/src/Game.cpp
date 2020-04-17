@@ -158,21 +158,25 @@ void Game::createGameObjects()
 		case 0:
 			m_pGameMapA->LoadMap(tutorialLevel);
 			setTimer(999);
+            TheSoundManager::Instance()->playMusic("bgm1", -1);
 			break;
 		case 1:
 			m_pGameMapA->LoadMap(thirdLevel);
 			setTimer(99);
 			m_pGameMapA->LoadMap(firstLevel);
 			setTimer(90);
+            TheSoundManager::Instance()->playMusic("bgm2", -1);
 			break;
 		case 2:
             m_pGameMapA->LoadMap(secondLevelA);
             m_pGameMapB->LoadMap(secondLevelB);
             setTimer(200);
+            TheSoundManager::Instance()->playMusic("bgm3", -1);
 			break;
 		case 3:
 			m_pGameMapA->LoadMap(thirdLevel);
 			setTimer(180);
+            TheSoundManager::Instance()->playMusic("bgm4", -1);
 			break;
 		case -2:
 			m_pGameMapA->LoadMap(test);
@@ -311,8 +315,10 @@ bool Game::init(const char* title, int xpos, int ypos, int height, int width, bo
 
 	// Load UI
 	UI::loadUI();
-	TheSoundManager::Instance()->load("../Assets/audios/nya.mp3",
-		"bgm", sound_type::SOUND_MUSIC);
+	TheSoundManager::Instance()->load("../Assets/audios/RaveBombs2.mp3", "bgm1", sound_type::SOUND_MUSIC);
+    TheSoundManager::Instance()->load("../Assets/audios/bombs_away_final.mp3", "bgm2", sound_type::SOUND_MUSIC);
+    TheSoundManager::Instance()->load("../Assets/audios/RaveBombs3.mp3", "bgm3", sound_type::SOUND_MUSIC);
+    TheSoundManager::Instance()->load("../Assets/audios/RaveBombs4.mp3", "bgm4", sound_type::SOUND_MUSIC);
 	std::cout << "init success" << std::endl;
 	m_bRunning = true; // everything initialized successfully - start the main loop
 	
