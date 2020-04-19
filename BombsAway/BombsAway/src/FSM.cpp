@@ -123,7 +123,7 @@ TitleState::TitleState()
 		TheSoundManager::Instance()->stopMusic();
 	}
 	std::cout << "Rendering Title..." << std::endl;
-	TheTextureManager::Instance()->load("../Assets/textures/Title.png", "title", TheGame::Instance()->getRenderer());
+	TheTextureManager::Instance()->load("../Assets/textures/Start-Screen.png", "title", TheGame::Instance()->getRenderer());
 	setType(TITLE);
 }
 
